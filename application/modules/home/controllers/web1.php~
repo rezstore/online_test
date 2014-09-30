@@ -1,0 +1,48 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Web1 extends CI_Controller {
+
+	function __construct(){
+	 parent::__construct();
+	 $this->load->helper(array('url','webtheme1'));
+	}
+
+	function index(){
+	 $this->load->view("header");
+	 $this->load->view("animation");
+	 $this->load->view("body");
+	 $this->load->view("footer");
+	 
+	 }
+	 
+	 function style(){
+	  $this->load->view("header");
+	  $this->load->view("body_style");
+	  $this->load->view("header_style");
+	  
+	  $this->load->view("footer");
+	  
+
+	 }
+	function full(){
+	  $this->load->view("header");
+	  $this->load->view("fuul_body");
+	  $this->load->view("footer");
+	 }
+	function colom(){
+	  $this->load->view("header");
+	  $this->load->view("coloum_body");
+	  $this->load->view("footer");
+	}
+	function porfolio(){
+	  $this->load->view("header");
+	  $this->load->view("portfolio_body");
+	  $this->load->view("footer");
+	}
+	function galery(){
+	  $this->load->view("header");
+	  $this->load->view("galery_body");
+	  $this->load->view("footer");
+	}
+}
+?>

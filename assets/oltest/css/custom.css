@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Petit Formal Script';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Petit Formal Script'), local('PetitFormalScript-Regular'), url(http://fonts.gstatic.com/s/petitformalscript/v4/OEZwr2-ovBsq2n3ACCKoEtgdb3q9Ts3XkY9bkaxM24g.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Alegreya Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Alegreya Sans Light'), local('AlegreyaSans-Light'), url(http://fonts.gstatic.com/s/alegreyasans/v3/11EDm-lum6tskJMBbdy9aaWGgEO1vGR9ucXjKCo8vxU.woff) format('woff');
+}
+@font-face {
+  font-family: 'Alegreya Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Alegreya Sans'), local('AlegreyaSans-Regular'), url(http://fonts.gstatic.com/s/alegreyasans/v3/KYNzioYhDai7mTMnx_gDgtUFqmyT-Ih543PWa_C0ig4.woff) format('woff');
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://fonts.gstatic.com/s/titilliumweb/v4/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Titillium Web'), local('TitilliumWeb-Regular'), url(http://fonts.gstatic.com/s/titilliumweb/v4/7XUFZ5tgS-tD6QamInJTcdGU7DQ8I6RFMlK0vgclk7w.woff) format('woff');
+}
