@@ -32,7 +32,7 @@
 	<!-- start banner -->
     <div class="banner">
     	 <img src="<?php echo get_image('banner.png');?>" alt="" />
-    	 <h2>Ayo Mulai Ujian Sekarang</h2>
+    	 <h2>Halo <?php echo ucfirst($c->get_username()); ?>? Ayo Mulai Ujian Sekarang</h2>
     	 <h3>Kerjakan soal...Dapatkan Nilai Terbaikmu!</h3>
     </div>
     <!-- start content -->

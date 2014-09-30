@@ -5,9 +5,13 @@ class Home extends CI_controller  {
 	function __construct (){
 		parent::__construct();
 		$this->load->helper(array('oltest','url','html'));
+		$this->load->model('m_oltest');
 	}
  
 	function index(){
+		if($this->get_username() != ""){
+			redirect('home/default_page');
+		}
 		if($_POST){
 			$user=$this->post('user');
 			$email=$this->post('email');
@@ -35,8 +39,9 @@ class Home extends CI_controller  {
 	}
 
 	function default_page(){
+		$data['c']=$this;
 		$this->load->view('header');
-		$this->load->view('slide');
+		$this->load->view('slide',$data);
 		$this->load->view('footer');
 	}
 

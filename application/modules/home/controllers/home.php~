@@ -5,16 +5,20 @@ class Home extends CI_controller  {
 	function __construct (){
 		parent::__construct();
 		$this->load->helper(array('oltest','url','html'));
+		$this->load->model('m_oltest');
 	}
  
 	function index(){
+		if($this->get_username() != ""){
+			redirect('home/default_page');
+		}
 		if($_POST){
 			$user=$this->post('user');
 			$email=$this->post('email');
 			if ($user !== "" and $email !== ""){
 			 $this->m_oltest->insert_user_tes($user,$email);
 			 $this->set_username($user);
-			 $this->
+			 $this->default_page();
 			}
 		}
 		$this->load->view('home');
