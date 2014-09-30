@@ -15,10 +15,11 @@
 				<div class="grid">
 		<p><img src="<?php echo get_image('coming.png');?>" title=""></p>
 		<h3>We are Still Working on it.</h3>
-		<form action="<?php echo get_site_url('test');?> " method= "POST">
-			<input type="text" size="30" value="Masukkan Email Dan Mulai Tes..." onblur="if (this.value=='') this.value = 'Masukkan Email Dan Mulai Tes...'" onfocus="this.value = ''" name="email" id="email">
+		<form action="" method= "POST">
+			<input type="text" size="30" value="Masukkan Nama..." onblur="if (this.value=='') this.value = 'Masukkan Nama ...'" onfocus="this.value = ''" name="user" style="width:150px;-webkit-border-radius: 3px;border-radius: 10px;">
+			<input type="text" size="30" value="Masukkan Email..." onblur="if (this.value=='') this.value = 'Masukkan Email ...'" onfocus="this.value = ''" name="email" id="email">
 			 <a href="<?php echo get_site_url('test');?>">
-			 	<button class="btn span btn-4 btn-4a icon-arrow-right"><span></span></button>
+			 	<button type="submit" class="btn span btn-4 btn-4a icon-arrow-right"><span></span></button>
 			 </a>
 			<div id="response"></div>
 				

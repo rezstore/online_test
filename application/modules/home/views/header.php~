@@ -16,6 +16,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="<?php echo get_css('style2.css');?>" rel="stylesheet" type="text/css" media="all" />
 <!--nav-->
 <script src="<?php echo get_js('jquery.min.js');?>"></script>
+<script src="<?php echo get_js_family('jquery-ui.js');?>"></script>
+
 <script>
 		$(function() {
 			var pull 		= $('#pull');
@@ -48,7 +50,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="cssmenu">
 			<ul>
 			  	<li class="active"><a href="<?php echo get_site_url('test');?>">Home</a></li>
-				<li><a href="<?php echo get_site_url('portofolio');?>">Portfolio</a></li>
 				<li><a href="<?php echo get_site_url('blog');?>">Blog</a></li>
 				<li ><a href="<?php echo get_site_url('about');?>">About</a></li>
 				<li ><a href="<?php echo get_site_url('contact');?>">Contact</a></li>

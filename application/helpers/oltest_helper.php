@@ -3,6 +3,10 @@ function get_css($filename=''){
  return base_url('assets/oltest/css/'.$filename);
 }
 
+function get_css_jquery($filename=''){
+ return base_url('assets/css/jquery_css/'.$filename);
+}
+
 function get_jquery_css($filename=''){
  return base_url('assets/css/jquery_css/'.$filename);
 }

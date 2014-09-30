@@ -8,10 +8,33 @@ class Home extends CI_controller  {
 	}
  
 	function index(){
+		if($_POST){
+			$user=$this->post('user');
+			$email=$this->post('email');
+			if ($user !== "" and $email !== ""){
+			 $this->m_oltest->insert_user_tes($user,$email);
+			 $this->set_username($user);
+			 $this->default_page();
+			}
+		}
 		$this->load->view('home');
 	}
+	
+	function set_username($user){
+		$this->load->library('session');
+		$this->session->set_userdata('username',$user);
+	}
+	
+	function get_username(){
+		$this->load->library('session');
+		return $this->session->userdata('username');
+	}
+	
+	function post($str=''){
+		return $this->input->post($str);
+	}
 
-	function test(){
+	function default_page(){
 		$this->load->view('header');
 		$this->load->view('slide');
 		$this->load->view('footer');
