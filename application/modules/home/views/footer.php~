@@ -5,7 +5,6 @@
 <div class="wrapper">
 	<div class="footer">
 		<div class="span_1_of_3">
-			<div class="foot_nav">
 				<ul>
 					<li><a href="#"><img src="<?php echo get_image('soc_icon1.png');?>" alt="" /></a></li>
 					<li><a href="#"><img src="<?php echo get_image('soc_icon2.png');?>" alt="" /></a></li>
@@ -13,8 +12,6 @@
 					<li><a href="#"><img src="<?php echo get_image('soc_icon4.png');?>" alt="" /></a></li>
 					<div class="clear"></div>
 				</ul>
-				
-			</div>
 		</div>
 		<div class="clear"></div>
 	</div>

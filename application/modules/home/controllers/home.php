@@ -14,7 +14,6 @@ class Home extends CI_controller  {
 	function test(){
 		$this->load->view('header');
 		$this->load->view('slide');
-		$this->load->view('body');
 		$this->load->view('footer');
 	}
 

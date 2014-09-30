@@ -48,7 +48,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="cssmenu">
 			<ul>
 			  	<li class="active"><a href="<?php echo get_site_url('test');?>">Home</a></li>
-				<li><a href="<?php echo get_site_url('portofolio');?>">Portfolio</a></li>
 				<li><a href="<?php echo get_site_url('blog');?>">Blog</a></li>
 				<li ><a href="<?php echo get_site_url('about');?>">About</a></li>
 				<li ><a href="<?php echo get_site_url('contact');?>">Contact</a></li>

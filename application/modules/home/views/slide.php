@@ -14,7 +14,8 @@
 	 	 <tr>
 	 	  <td>
 	 	   <div class="grid_1_of_4 images_1_of_4" style="width:200px; height:300px;">
-			<img src="<?php echo get_image('pic2.jpg');?>"" title="Project1" alt=""/>
+			<a href="<?php echo get_site_url();?>">
+			<img src="<?php echo get_image('pic2.jpg');?>"" title="Project1" alt=""/></a>
 			 <h3><a href="<?php echo get_site_url();?>">Referensi</a></h3>
 			 <p style="text-align:center;"></p>
 		   </div>
@@ -43,3 +44,7 @@
 		  </td>
 		 </tr>
 		 </table>
+
+ 	 </div>
+</div>
+</div>

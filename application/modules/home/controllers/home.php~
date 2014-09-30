@@ -4,7 +4,7 @@ class Home extends CI_controller  {
 
 	function __construct (){
 		parent::__construct();
-		$this->load->helper(array('webdsg_006','url','html'));
+		$this->load->helper(array('oltest','url','html'));
 	}
  
 	function index(){

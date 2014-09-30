@@ -59,7 +59,7 @@ body {
 }
 .cssmenu > ul > li.active a{
 	color:#ffffff;
-	background-color:#FF61A0;
+	background-color:#9B999A;
 }
 .cssmenu > ul > li span img {
 	vertical-align: middle;
@@ -79,7 +79,7 @@ body {
 	transition: all 0.3s ease-out;
 }
 .cssmenu > ul > li > a:hover {
-	background-color:#FF61A0;
+	background-color:#9B999A;
 	color: #ffffff;
 }
 /* display with 840px  */
@@ -225,6 +225,7 @@ body {
 	color: #FF61A0;
 }
 .images_1_of_4  h4 a{
+	text-indent:35px;
 	font-style: italic;
 	line-height: 1.5em;
 	font-size: 0.8725em;

@@ -14,7 +14,8 @@
 	 	 <tr>
 	 	  <td>
 	 	   <div class="grid_1_of_4 images_1_of_4" style="width:200px; height:300px;">
-			<img src="<?php echo get_image('pic2.jpg');?>"" title="Project1" alt=""/>
+			<a href="<?php echo get_site_url();?>">
+			<img src="<?php echo get_image('pic2.jpg');?>"" title="Project1" alt=""/></a>
 			 <h3><a href="<?php echo get_site_url();?>">Referensi</a></h3>
 			 <p style="text-align:center;"></p>
 		   </div>
@@ -37,7 +38,7 @@
 		  <td>
 	 	   <div class="grid_1_of_4 images_1_of_4" style="width:200px; height:300px;">
 			<a href="<?php echo get_site_url();?>"><img src="<?php echo get_image('pic4.jpg');?>"" title="Project1" alt=""/></a>
-			 <h3 style="text-indent:20px;"><a href="<?php echo get_site_url();?>">Forum Diskusi</a></h3>
+			 <h3><a href="<?php echo get_site_url();?>" style="text-indent:20px;">Forum Diskusi</a></h3>
 			 <p style="text-align:center;"></p>
 		   </div>
 		  </td>
