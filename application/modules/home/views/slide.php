@@ -1,34 +1,4 @@
-<style>
-    body { font-size: 62.5%; }
-    label, input { display:block; }
-    input.text { margin-bottom:12px; width:95%; padding: .4em; }
-    fieldset { padding:0; border:0; margin-top:25px; }
-    h1 { font-size: 1.2em; margin: .6em 0; }
-    div#users-contain { width: 350px; margin: 20px 0; }
-    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-    .ui-dialog .ui-state-error { padding: .3em; }
-    .validateTips { border: 1px solid transparent; padding: 0.3em; }
-  </style>
-  <script>
-  $(function() {
-    $( "#dialog-form" ).dialog({
-      autoOpen: false,
-      show: {
-        effect: "blind",
-        duration: 100
-      },
-      hide: {
-        effect: "explode",
-        duration: 1000
-      }
-    });
- 
-    $( "#opener" ).click(function() {
-      $( "#dialog-form" ).dialog( "open" );
-    });
-  });
-</script>
+
 	<!-- start banner -->
     <div class="banner">
     	 <img src="<?php echo get_image('banner.png');?>" alt="" />
@@ -52,7 +22,7 @@
 		  </td>
 		  <td>
 	 	   <div class="grid_1_of_4 images_1_of_4" style="width:200px; height:300px;" id="opener">
-			<a href="#<?php echo get_site_url();?>">
+			<a href="<?php echo get_site_url('online_test');?>">
 			 <img src="<?php echo get_image('pic1.jpg');?>"" title="Project1" alt=""/></a>
 			 <h3><a href="<?php echo get_site_url();?>">Start Ujian</a></h3>
 			 <p style="text-align:center;"></p>
@@ -78,20 +48,45 @@
  	 </div>
 </div>
 </div>
- <div id="dialog-form" title="Create new user">
+<?php
+$class=$this->m_oltest->select_all_classname();
+$level=$this->m_oltest->select_all_levelname();
+$subject=$this->m_oltest->select_all_subject();
+$arr_class=array();
+$arr_level=array();
+$arr_subject=array();
+
+foreach($class->result() as $r){
+ $arr_class[$r->class_code]=$r->class_name;
+}
+
+foreach($level->result() as $w){
+ $arr_level[$w->level_code]=$w->level_name;
+}
+
+foreach($subject->result() as $q){
+ $arr_subject[$q->subject_code]=$q->subject_name;
+}
+
+?>
+<!-- <div id="dialog-form" title="Create new user">
   <p class="validateTips">All form fields are required.</p>
  
-  <form>
-    <fieldset>
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-      <label for="email">Email</label>
-      <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
- 
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="">
-    </fieldset>
+  <form id="form" method="POST" action="<?php echo get_site_url('check_request_exam'); ?>">
+      <table style="border:1;">
+	      <tr>
+		      <td>Mata Pelajaran <?php echo nbs(2).dropdown('',$arr_subject,'','class="text ui-widget-content ui-corner-all"'); ?></td>
+	      </tr>
+	      <tr>
+		      <td>Tingat <?php echo nbs(2).dropdown('',$arr_level,'','class="text ui-widget-content ui-corner-all" style="margin-left:45px;"'); ?></td>
+	      </tr>
+	      <tr>
+		      <td>Kelas <?php echo nbs(2).dropdown('',$arr_class,'','class="text ui-widget-content ui-corner-all" style="margin-left:48px;"').br(2); ?></td>
+	      </tr>
+	      <tr>
+	      <td colspan=3 style="text-align:right;">
+	      	<button id="submit">Start</button></td>
+	      </tr>
+      </table>
   </form>
- </div>
+ </div>-->
