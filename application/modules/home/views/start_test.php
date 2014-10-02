@@ -10,8 +10,8 @@ $class=strtoupper($c->get_session('class'));
 			       echo "Halo ".$c->get_username()."!!!
 			       <p>
 			        Anda Memutuskan Untuk mencoba mengerjakan soal \" ".$subject." \" Kelas \"".$class."\"
-			        dengan jumlah soal <i>".$datas."</i> butir Soal Pilihan Ganda. <p>
-			        Setiap halaman terdiri atas 5 soal dan anda harus memilih salah satu pilihan jawaban yang paling benar 
+			        dengan jumlah soal <i class='lead'>\" ".$datas." Butir \"</i>  Soal Pilihan Ganda. <p>
+			        Setiap halaman terdiri atas 5 soal dan anda harus memilih salah satu pilihan jawaban yang <i class='lead'>\" Paling Benar \"</i> 
 			        dan nilai akan kami tampilkan jika semua soal sudah terjawab.
 			       </p> ";
 			      ?>
@@ -20,8 +20,8 @@ $class=strtoupper($c->get_session('class'));
 			      </tr><tr>
 			      <td style="text-align:right">
 			      <?php
-			       echo anchor('','<button type="button" class="btn btn-danger">Tolak</button>').nbs();
-			       echo anchor('','<button type="button" class="btn btn-primary">Lanjut</button>');
+			       echo anchor(get_site_url(''),'<button type="button" class="btn btn-danger">Tolak</button>').nbs();
+			       echo anchor(get_site_url('start'),'<button type="button" class="btn btn-primary">Lanjut</button>');
 			      ?>
 			      </td>
 		      </tr>

@@ -48,45 +48,4 @@
  	 </div>
 </div>
 </div>
-<?php
-$class=$this->m_oltest->select_all_classname();
-$level=$this->m_oltest->select_all_levelname();
-$subject=$this->m_oltest->select_all_subject();
-$arr_class=array();
-$arr_level=array();
-$arr_subject=array();
 
-foreach($class->result() as $r){
- $arr_class[$r->class_code]=$r->class_name;
-}
-
-foreach($level->result() as $w){
- $arr_level[$w->level_code]=$w->level_name;
-}
-
-foreach($subject->result() as $q){
- $arr_subject[$q->subject_code]=$q->subject_name;
-}
-
-?>
-<!-- <div id="dialog-form" title="Create new user">
-  <p class="validateTips">All form fields are required.</p>
- 
-  <form id="form" method="POST" action="<?php echo get_site_url('check_request_exam'); ?>">
-      <table style="border:1;">
-	      <tr>
-		      <td>Mata Pelajaran <?php echo nbs(2).dropdown('',$arr_subject,'','class="text ui-widget-content ui-corner-all"'); ?></td>
-	      </tr>
-	      <tr>
-		      <td>Tingat <?php echo nbs(2).dropdown('',$arr_level,'','class="text ui-widget-content ui-corner-all" style="margin-left:45px;"'); ?></td>
-	      </tr>
-	      <tr>
-		      <td>Kelas <?php echo nbs(2).dropdown('',$arr_class,'','class="text ui-widget-content ui-corner-all" style="margin-left:48px;"').br(2); ?></td>
-	      </tr>
-	      <tr>
-	      <td colspan=3 style="text-align:right;">
-	      	<button id="submit">Start</button></td>
-	      </tr>
-      </table>
-  </form>
- </div>-->

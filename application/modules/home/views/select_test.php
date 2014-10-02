@@ -17,19 +17,19 @@ foreach($subject->result() as $q){
 	<!-- start banner -->
     <div class="banner">
 	  <?php echo form_open('home/check_request_exam'); ?>
-	      <table style="width:50%">
+	      <table style="width:50%" class="table">
 		      <tr>
 			      <td>Mata Pelajaran </td>
 			      <td><?php echo dropdown('subject',$arr_subject,'','class="text ui-widget-content ui-corner-all"'); ?></td>
 		      </tr>
 		      <tr>
 			      <td>Kelas </td>
-			      <td><?php echo nbs(2).dropdown('class',$arr_class,'','class="text ui-widget-content ui-corner-all" style="margin-left:48px;"').br(2); ?></td>
+			      <td><?php echo dropdown('class',$arr_class,'','class="text ui-widget-content ui-corner-all" ').br(2); ?></td>
 		      </tr>
 		      <tr>
 		      <td colspan=3 style="text-align:right;">
 		      	<?php
-		      	 echo submit('submit','start');
+		      	 echo '<button type="button" class="btn btn-danger">Batal</button> '.submit('submit','start','class="btn btn-primary"');
 		      	?></td>
 		      </tr>
 	      </table>

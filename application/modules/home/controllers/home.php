@@ -113,9 +113,22 @@ class Home extends CI_controller  {
 					$this->set_session('subject',$subject);
 					$this->set_session('class',$class);
 					redirect(get_site_url('start_test'));
-				}			
-			}
-		}
+				}else{$err= "Maaf Saat ini soal Tersebut Belum Tersedia.";}			
+			}else{$err= "Maaf Tidk boleh ada yang kosong";}
+		}else{$err= "Error!!!";}
+		echo $err;
+	}
+	
+	function start(){
+	  $this->set_session('no_page',0);
+	  $data['c']=$this;
+	  $this->load->helper('form');
+	  $data['subject']=$this->get_session('subject');
+	  $data['class']=$this->get_session('class');
+	  $data['no_page']=$this->get_session('no_page');
+	  	$this->load->view('header');
+		$this->load->view('start',$data);
+		$this->load->view('footer');	
 	}
 	
 

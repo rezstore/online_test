@@ -43,6 +43,19 @@ class m_oltest extends CI_Model{
  	}
  }
  
+ function get_questions($subject,$class,$page){
+ 	$subject=$this->escape($subject);
+ 	$class=$this->escape($class);
+ 	$limit=$this->escape($page + 5);
+ 	$page=$this->escape($page);
+ 	$sql="SELECT exam_questions.exam_content,choice_answers.* 
+ 		FROM exam_questions 
+ 		LEFT JOIN choice_answers ON exam_questions.exam_ID = choice_answers.exam_ID
+ 		WHERE exam_questions.subject_code = $subject AND exam_questions.class_code=$class LIMIT $page,$limit";
+ 	$q=$this->db->query($sql);
+ 	return $q;
+ }
+ 
  
 
 
