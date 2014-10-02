@@ -56,6 +56,13 @@ class m_oltest extends CI_Model{
  	return $q;
  }
  
+ function select_exam_answer($exam_id){
+	$exam_id=$this->escape($exam_id);
+	$sql="SELECT answer FROM correct_answer WHERE exam_ID=$exam_id LIMIT 1";
+	$q=$this->db->query($sql);
+	return $q;
+ }
+ 
  
 
 

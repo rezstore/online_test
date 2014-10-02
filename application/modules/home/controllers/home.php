@@ -131,6 +131,46 @@ class Home extends CI_controller  {
 		$this->load->view('footer');	
 	}
 	
+	function check_answers(){
+		if($_POST){
+		  $n=1;
+		  $err=false;
+		  $id_soal=$this->post('id_soal');
+		  $count=count($id_soal);
+		  foreach($id_soal as $r){
+		   $name="data".$n;
+		   $an="answer".$n;
+		   $exam_id[$n]=$r;
+		   $answr=$this->post($an);
+		   $answer[$n]=$answr;
+		   #jika salah satu kosong maka error;
+		   if($answr == ""){$err=true;}
+		  $n++;
+		  }echo br();
+		  #jika semua jawaban terisi maka ;
+		  if($err == false){
+			for($a=1;$a<=$count;$a++){
+			 $anr=$answer[$a];
+			 $ex_id=$exam_id[$a];
+			  $status=$this->check_real_answer($ex_id,$anr);
+			  $this->m_oltest->insert_to_tmp_db($this->get_username,$ex_id,$anr,$status);
+			}
+		  }else{echo "salah";
+		  }
+		}
+	
+	}
+	
+	function check_real_answer($ex_id,$anr){
+	 $exam_id=$this->escape($ex_id);
+	 $answer=$this->escape($anr);
+	 $q=$this->select_exam_answer($exam_id);
+	 foreach($q->result() as $r){
+		$true=$r->answer;
+		if($true == $anr){return 1;}else{return 0;}
+	 }
+	}
+	
 
 
 }
