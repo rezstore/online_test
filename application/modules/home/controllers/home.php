@@ -7,7 +7,8 @@ class Home extends CI_controller  {
 		$this->load->helper(array('oltest','url','html'));
 		$this->load->model('m_oltest');
 	}
- 
+	
+ # SETTING SESSION
 	function set_username($user){
 		$this->load->library('session');
 		$this->session->set_userdata('username',$user);
@@ -18,6 +19,7 @@ class Home extends CI_controller  {
 		$this->session->set_userdata($name,$val);
 	}
 	
+# GETTING SESSION
 	function get_session($name){
 		$this->load->library('session');
 		return $this->session->userdata($name);
@@ -27,6 +29,15 @@ class Home extends CI_controller  {
 		$this->load->library('session');
 		return $this->session->userdata('username');
 	}
+# UNSET SESSION
+	function unset_sessions(){
+		$this->load->library('session');
+		$arr=array('subject','class','no_page','sess_id');
+		foreach($arr as $r){
+			$this->session->unset_userdata($r);
+		}
+	}
+# GET POST INPUT
 	
 	function post($str=''){
 		return $this->input->post($str);
@@ -83,6 +94,8 @@ class Home extends CI_controller  {
 	}
 
 	function online_test(){
+		$subject=$this->get_session('subject');
+		if($subject != ""){redirect(get_site_url('start'));}
 		$this->load->helper('form');
 		$this->load->view('header');
 		$this->load->view('select_test');
@@ -90,7 +103,10 @@ class Home extends CI_controller  {
 	}
 
 	function start_test(){
-		$this->load->helper('form');
+		$subject=$this->get_session('subject');
+		if($subject != ""){redirect(get_site_url('start'));}
+		
+		 $this->load->helper('form');
 		 $subject=$this->get_session('subject');
 		 $class=$this->get_session('class');
 		 $data['c']=$this;
@@ -100,6 +116,14 @@ class Home extends CI_controller  {
 			$this->load->view('start_test',$data);
 			$this->load->view('footer');		 
 		 }
+	}
+	
+	function browse_score(){
+		$username=$this->get_username();
+		$data['datas']=$this->m_oltest->get_scores($username);
+		$this->load->view('header');
+		$this->load->view('browse_scores',$data);
+		$this->load->view('footer');
 	}
 	
 # OPERATIONS ======================================================
@@ -120,12 +144,26 @@ class Home extends CI_controller  {
 	}
 	
 	function start(){
-	  $this->set_session('no_page',0);
+	  $page_active=$this->get_session('no_page');
+	  $subject=$this->get_session('subject');
+	  $class=$this->get_session('class');
+	  $total=$this->m_oltest->select_available_exam($subject,$class);
+	  if($subject == ""){redirect(get_site_url('online_test'));}
+		  if($page_active == ""){
+		  	$this->set_session('no_page',0);
+		  	$this->set_session('sess_id',date('dm').'-'.$subject.'-'.$class);
+		  }
+		  
+		  if($total < $page_active){
+		   redirect(get_site_url('calculate_correct_answers'));
+		   exit;
+		  }
 	  $data['c']=$this;
 	  $this->load->helper('form');
-	  $data['subject']=$this->get_session('subject');
-	  $data['class']=$this->get_session('class');
-	  $data['no_page']=$this->get_session('no_page');
+	  $data['subject']=$subject;
+	  $data['class']=$class;
+	  $data['no_page']=$page_active;
+	  
 	  	$this->load->view('header');
 		$this->load->view('start',$data);
 		$this->load->view('footer');	
@@ -138,38 +176,62 @@ class Home extends CI_controller  {
 		  $id_soal=$this->post('id_soal');
 		  $count=count($id_soal);
 		  foreach($id_soal as $r){
-		   $name="data".$n;
-		   $an="answer".$n;
-		   $exam_id[$n]=$r;
-		   $answr=$this->post($an);
+		   $name="data".$n;	   $an="answer".$n;
+		   $exam_id[$n]=$r;	   $answr=$this->post($an);
 		   $answer[$n]=$answr;
 		   #jika salah satu kosong maka error;
 		   if($answr == ""){$err=true;}
 		  $n++;
-		  }echo br();
+		  }
 		  #jika semua jawaban terisi maka ;
 		  if($err == false){
 			for($a=1;$a<=$count;$a++){
 			 $anr=$answer[$a];
 			 $ex_id=$exam_id[$a];
-			  $status=$this->check_real_answer($ex_id,$anr);
-			  $this->m_oltest->insert_to_tmp_db($this->get_username,$ex_id,$anr,$status);
+			 # CHECK DUPLICATE IN TEMPORARY
+			  $sess_id=$this->get_session('sess_id');
+			    $check=$this->m_oltest->select_where($this->get_username(),$sess_id,$ex_id);
+			    if($check->num_rows() <= 0){
+				  $status=$this->check_real_answer($ex_id,$anr);
+				  $this->m_oltest->insert_to_tmp_db($this->get_username(),$this->get_session('sess_id'),$ex_id,$anr,$status);			    
+			    }else{
+			    	//echo "a";
+			    }
 			}
-		  }else{echo "salah";
+			# UPDATE SETTING PAGE
+			$this->set_session('no_page',$this->get_session('no_page') + 5);
+			redirect(get_site_url('start'));
+		  }else{
+		  	echo "salah";
 		  }
 		}
-	
 	}
 	
 	function check_real_answer($ex_id,$anr){
-	 $exam_id=$this->escape($ex_id);
-	 $answer=$this->escape($anr);
-	 $q=$this->select_exam_answer($exam_id);
+	 $q=$this->m_oltest->select_exam_answer($ex_id);
 	 foreach($q->result() as $r){
-		$true=$r->answer;
-		if($true == $anr){return 1;}else{return 0;}
+		$true=ucfirst($r->answer);
+		if($true == $anr){return 1;}
 	 }
+	 return 0;
 	}
+	
+	function calculate_correct_answers(){
+	 $username=$this->get_username();
+	 $subject=$this->get_session('subject');
+	 $class=$this->get_session('class');
+	 $sess_id=$this->get_session('sess_id');
+	 $total=$this->m_oltest->select_available_exam($subject,$class);
+	 $per_soal=100/$total;
+	 $get_sum_correct=$this->m_oltest->get_sum_correct($sess_id,$username);
+	 $score=ceil($get_sum_correct * $per_soal);
+	 #INSERT TO USER SCORES 
+	 $this->m_oltest->insert_new_score($username,$sess_id,$score);
+	 $this->unset_sessions();
+	 redirect(get_site_url('browse_score'));
+	}
+	
+	
 	
 
 

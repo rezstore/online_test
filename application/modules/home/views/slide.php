@@ -1,4 +1,6 @@
-
+<style>
+h3{font-size:15px;}
+</style>
 	<!-- start banner -->
     <div class="banner">
     	 <img src="<?php echo get_image('banner.png');?>" alt="" />
@@ -24,7 +26,7 @@
 	 	   <div class="grid_1_of_4 images_1_of_4" style="width:200px; height:300px;" id="opener">
 			<a href="<?php echo get_site_url('online_test');?>">
 			 <img src="<?php echo get_image('pic1.jpg');?>"" title="Project1" alt=""/></a>
-			 <h3><a href="<?php echo get_site_url();?>">Start Ujian</a></h3>
+			 <h3><a href="<?php echo get_site_url('online_test');?>">Start Ujian</a></h3>
 			 <p style="text-align:center;"></p>
 		   </div>
 		  </td>
