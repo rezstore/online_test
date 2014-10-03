@@ -32,11 +32,13 @@ class Home extends CI_controller  {
 		return $user;
 	}
 # UNSET SESSION
-	function unset_sessions($val1='',$val2=''){
+	function unset_sessions($all='',$val1='',$val2=''){
 		$this->load->library('session');
-		$arr=array('subject','class','no_page','sess_id');
-		foreach($arr as $r){
-			$this->session->unset_userdata($r);
+		if($all == 'ALL'){
+			$arr=array('subject','class','no_page','sess_id');
+			foreach($arr as $r){
+				$this->session->unset_userdata($r);
+			}
 		}
 		if($val1=="") $this->session->unset_userdata($val1);
 		if($val2=="") $this->session->unset_userdata($val2);
@@ -62,17 +64,23 @@ class Home extends CI_controller  {
 		if($this->get_username() != ""){
 			redirect(get_site_url('default_page'));
 		}
+		$data['err']="";
 		if($_POST){
+			$captcha=$this->get_session('captcha');
 			$user=$this->post('user');
 			$email=$this->post('email');
-			if ($user !== "" and $email !== ""){
+			$cpt=$this->post('captcha');
+			if ($user !== "" and $email !== "" and $cpt == $captcha){
 			 if ($user == "Masukkan Nama" or $email == "Masukkan Email"){redirect('');}
-			 $this->m_oltest->insert_user_tes($user,$email);
-			 $this->set_username($user);
-			 redirect(get_site_url('default_page'));
-			}
+				 $this->m_oltest->insert_user_tes($user,$email);
+				 $this->set_username($user);
+				 #delete session captcha
+				 $this->unset_sessions('','captcha');
+				 redirect(get_site_url('default_page'));
+			}else{$data['err']="Data Yang anda masukkan Tidak Sesuai!!!";}
 		}
-		$this->load->view('home');
+		$this->set_session('captcha',1+ceil(date('is')/ date('s')+(60/date('s'))) + date('s'));
+		$this->load->view('home',$data);
 	}
 	
 
@@ -254,7 +262,24 @@ class Home extends CI_controller  {
 	 redirect(get_site_url('browse_scores'));
 	}
 	
-	
+#CREAT IMAGE
+	function captcha(){
+		$str=$this->get_session('captcha');
+		$my_img = imagecreate( 50, 40 );
+		$background = imagecolorallocate( $my_img, 245, 245, 245 );
+		$text_colour = imagecolorallocate( $my_img, 85, 85, 85 );
+		$line_colour = imagecolorallocate( $my_img, 128, 255, 0 );
+		imagestring( $my_img, 10, 12, 10, $str, $text_colour );
+		imagesetthickness ( $my_img, 5 );
+		imageline( $my_img, 30, 45, 165, 45, $line_colour );
+
+		header( "Content-type: image/png" );
+		imagepng( $my_img );
+		imagecolordeallocate( $line_color );
+		imagecolordeallocate( $text_color );
+		imagecolordeallocate( $background );
+		imagedestroy( $my_img );
+	}
 	
 
 

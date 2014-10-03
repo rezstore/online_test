@@ -27,14 +27,19 @@
 			 | ".
 			 anchor("http://forum.onlinetes.com","Forum");?></p>
 		<form action="" method= "POST">
-			<input type="text" size="30" value="Masukkan Nama" onblur="if (this.value=='') this.value = 'Masukkan Nama'" onfocus="this.value = ''" name="user" style="width:150px;-webkit-border-radius: 3px;border-radius: 10px;">
-			<input type="text" size="30" value="Masukkan Email" onblur="if (this.value=='') this.value = 'Masukkan Email'" onfocus="this.value = ''" name="email" id="email">
+		  <div style="float:center;">
+			<input type="text" size="20" value="Masukkan Nama" onblur="if (this.value=='') this.value = 'Masukkan Nama'" onfocus="this.value = ''" name="user" style="width:150px;-webkit-border-radius: 3px;border-radius: 10px;">
+			<input type="text" size="20" value="Masukkan Email" onblur="if (this.value=='') this.value = 'Masukkan Email'" onfocus="this.value = ''" name="email" id="email" style="width:150px;-webkit-border-radius: 3px;border-radius: 10px;">
+			<input type="image" src="<?php echo get_site_url('captcha');?>" style="border-radius:10px;">
+			<input type="text" size="5" value="captcha" onblur="if (this.value=='') this.value = 'captcha'" onfocus="this.value = ''" name="captcha" id="user" style="width:200px;">
+			
 			 <a href="<?php echo get_site_url('test');?>">
 			 	<button type="submit" class="btn span btn-4 btn-4a icon-arrow-right"><span></span></button>
 			 </a>
-			<div id="response"></div>
+		  </div>
+			<div id="response" style="margin-top:20px;color:red;"><?php if(isset($err))echo $err; ?></div>
 				
-			</form>
+		</form>
 			<div class="clear"></div>
 			</div>
 		<div class="clear"></div>
