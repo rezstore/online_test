@@ -32,8 +32,8 @@ h3{font-size:15px;}
 		  </td>
 		  <td>
 	 	   <div class="grid_1_of_4 images_1_of_4" style="width:200px; height:300px;">
-			<a href="<?php echo get_site_url();?>"><img src="<?php echo get_image('pic3.jpg');?>"" title="Project1" alt=""/></a>
-			 <h3><a href="<?php echo get_site_url();?>">Nilai Ujian</a></h3>
+			<a href="<?php echo get_site_url('browse_scores');?>"><img src="<?php echo get_image('pic3.jpg');?>"" title="Project1" alt=""/></a>
+			 <h3><a href="<?php echo get_site_url('browse_scores');?>">Nilai Ujian</a></h3>
 			 <p style="text-align:center;"></p>
 		   </div>
 		  </td>

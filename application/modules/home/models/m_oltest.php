@@ -30,7 +30,7 @@ class m_oltest extends CI_Model{
  }
  
  function select_all_classname(){
- 	$sql="SELECT * FROM class_options WHERE status= 1";
+ 	$sql="SELECT * FROM  `class_options` ORDER BY  `class_options`.`index_order` ASC ";
  	$q=$this->db->query($sql);
  	return $q;
  }

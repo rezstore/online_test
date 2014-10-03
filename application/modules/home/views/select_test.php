@@ -5,7 +5,7 @@ $arr_class=array();
 $arr_subject=array();
 
 foreach($class->result() as $r){
- $arr_class[$r->class_code]=$r->class_name;
+ $arr_class[$r->class_code]=ucwords($r->class_name);
 }
 
 foreach($subject->result() as $q){

@@ -27,16 +27,29 @@ class Home extends CI_controller  {
 	
 	function get_username(){
 		$this->load->library('session');
-		return $this->session->userdata('username');
+		$user =$this->session->userdata('username');
+		//if($user == "")redirect(get_site_url());
+		return $user;
 	}
 # UNSET SESSION
-	function unset_sessions(){
+	function unset_sessions($val1='',$val2=''){
 		$this->load->library('session');
 		$arr=array('subject','class','no_page','sess_id');
 		foreach($arr as $r){
 			$this->session->unset_userdata($r);
 		}
+		if($val1=="") $this->session->unset_userdata($val1);
+		if($val2=="") $this->session->unset_userdata($val2);
 	}
+	
+# LOGOUT	
+	function logout(){
+		//$this->unset_sessions('username');
+		$this->load->library('session');
+		$this->session->sess_destroy();
+		redirect(get_site_url(''));
+	}
+	
 # GET POST INPUT
 	
 	function post($str=''){
@@ -47,15 +60,16 @@ class Home extends CI_controller  {
 
 	function index(){
 		if($this->get_username() != ""){
-			redirect('home/default_page');
+			redirect(get_site_url('default_page'));
 		}
 		if($_POST){
 			$user=$this->post('user');
 			$email=$this->post('email');
 			if ($user !== "" and $email !== ""){
+			 if ($user == "Masukkan Nama" or $email == "Masukkan Email"){redirect('');}
 			 $this->m_oltest->insert_user_tes($user,$email);
 			 $this->set_username($user);
-			 redirect('home/default_page');
+			 //redirect(get_site_url('default_page'));
 			}
 		}
 		$this->load->view('home');
@@ -118,11 +132,11 @@ class Home extends CI_controller  {
 		 }
 	}
 	
-	function browse_score(){
+	function browse_scores(){
 		$username=$this->get_username();
 		$data['datas']=$this->m_oltest->get_scores($username);
 		$this->load->view('header');
-		$this->load->view('browse_score',$data);
+		$this->load->view('browse_scores',$data);
 		$this->load->view('footer');
 	}
 	
@@ -228,7 +242,7 @@ class Home extends CI_controller  {
 	 #INSERT TO USER SCORES 
 	 $this->m_oltest->insert_new_score($username,$sess_id,$score);
 	 $this->unset_sessions();
-	 redirect(get_site_url('browse_score'));
+	 redirect(get_site_url('browse_scores'));
 	}
 	
 	

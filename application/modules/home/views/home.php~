@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-     <title>Online Tes</title>
+     <title>p</title>
 	<link href="<?php echo get_css('style.css');?>" rel="stylesheet" type="text/css" media="all" />
 	<link href="<?php echo get_css('custom.css');?>" rel='stylesheet' type='text/css'>
 	<style>
