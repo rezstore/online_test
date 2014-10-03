@@ -158,6 +158,7 @@ class Home extends CI_controller  {
 				if ($q >= 1){
 					$this->set_session('subject',$subject);
 					$this->set_session('class',$class);
+					$this->set_session('sess_id',date('dmis').'-'.$subject.'-'.$class);
 					redirect(get_site_url('start_test'));
 				}else{$err= "Maaf Saat ini soal Tersebut Belum Tersedia.";}			
 			}else{$err= "Maaf Tidk boleh ada yang kosong";}
@@ -174,7 +175,6 @@ class Home extends CI_controller  {
 	  if($subject == ""){redirect(get_site_url('online_test'));}
 		  if($page_active == ""){
 		  	$this->set_session('no_page',0);
-		  	$this->set_session('sess_id',date('dm').'-'.$subject.'-'.$class);
 		  }
 		  
 		  if($total < $page_active){
