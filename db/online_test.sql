@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 02, 2014 at 07:40 PM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Host: localhost
+-- Generation Time: Oct 03, 2014 at 02:51 PM
+-- Server version: 5.5.38-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -59,23 +59,26 @@ INSERT INTO `choice_answers` (`ID`, `exam_ID`, `a`, `b`, `c`, `d`, `e`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `class_options` (
-  `class_code` varchar(3) NOT NULL,
+  `ID` int(11) NOT NULL,
+  `class_code` varchar(4) NOT NULL,
   `class_name` varchar(5) NOT NULL,
+  `index_order` tinyint(1) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`class_code`)
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `class_options`
 --
 
-INSERT INTO `class_options` (`class_code`, `class_name`, `status`) VALUES
-('ix', 'IX', 1),
-('vi', 'VI', 1),
-('vii', 'VII', 1),
-('x', 'X', 1),
-('xi', 'XI', 1),
-('xii', 'XII', 1);
+INSERT INTO `class_options` (`ID`, `class_code`, `class_name`, `index_order`, `status`) VALUES
+(1, 'vi', 'VI', 0, 1),
+(2, 'vii', 'VII', 1, 1),
+(3, 'viii', 'XIII', 2, 1),
+(4, 'ix', 'IX', 3, 1),
+(5, 'x', 'X', 4, 1),
+(6, 'xi', 'XI', 5, 1),
+(7, 'xii', 'XII', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -88,7 +91,18 @@ CREATE TABLE IF NOT EXISTS `correct_answer` (
   `exam_ID` varchar(20) NOT NULL,
   `answer` varchar(1) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `correct_answer`
+--
+
+INSERT INTO `correct_answer` (`ID`, `exam_ID`, `answer`) VALUES
+(1, '4', 'a'),
+(2, '5', 'c'),
+(3, '6', 'a'),
+(4, '7', 'c'),
+(5, '8', 'a');
 
 -- --------------------------------------------------------
 
@@ -149,13 +163,27 @@ INSERT INTO `subjects` (`ID`, `subject_code`, `subject_name`, `status`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `temporary_user_answers` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `sess_ID` varchar(20) DEFAULT NULL,
   `date_time` datetime NOT NULL,
   `user` varchar(30) NOT NULL,
   `exam_ID` varchar(5) NOT NULL,
   `answer` varchar(1) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
+
+--
+-- Dumping data for table `temporary_user_answers`
+--
+
+INSERT INTO `temporary_user_answers` (`ID`, `sess_ID`, `date_time`, `user`, `exam_ID`, `answer`, `status`) VALUES
+(48, '0310-komp-x', '2014-10-03 10:27:42', 'rohman', '4', 'A', 1),
+(49, '0310-komp-x', '2014-10-03 10:27:42', 'rohman', '5', 'A', 0),
+(50, '0310-komp-x', '2014-10-03 10:27:42', 'rohman', '6', 'B', 1),
+(51, '0310-komp-x', '2014-10-03 10:27:42', 'rohman', '7', 'A', 1),
+(52, '0310-komp-x', '2014-10-03 10:27:42', 'rohman', '8', 'C', 1),
+(53, '0310-komp-x', '2014-10-03 10:27:46', 'rohman', '9', 'B', 0);
 
 -- --------------------------------------------------------
 
@@ -169,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `user_accounts` (
   `email` varchar(100) NOT NULL,
   `status` tinyint(4) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `user_accounts`
@@ -179,7 +207,40 @@ INSERT INTO `user_accounts` (`ID`, `username`, `email`, `status`) VALUES
 (3, 'rohman', 'rohman@rezstore.com', 0),
 (4, 'rohman', 'rohman@rezstore.com', 0),
 (5, 'rohman', 'rohmanahmad123@yahoo.com', 0),
-(6, 'rohman ahmad', 'rohman@suseda.com', 0);
+(6, 'rohman ahmad', 'rohman@suseda.com', 0),
+(7, 'Masukkan Nama ...', 'Masukkan Email ...', 0),
+(8, 'Masukkan Nama', 'Masukkan Email', 0),
+(9, 'Masukkan Nama', 'Masukkan Email', 0),
+(10, 'Masukkan Nama', 'Masukkan Email', 0),
+(11, 'Masukkan Nama', 'Masukkan Email', 0),
+(12, 'Masukkan Nama', 'Masukkan Email', 0),
+(13, 'Masukkan Nama', 'Masukkan Email', 0),
+(14, 'Masukkan Nama', 'Masukkan Email', 0),
+(15, 'Masukkan Nama', 'Masukkan Email', 0),
+(16, 'asdasd', 'asdasdasd', 0),
+(17, 'rohman', 'rohmanahmad123@yahoo.com', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_scores`
+--
+
+CREATE TABLE IF NOT EXISTS `user_scores` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `date_time` datetime NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `sess_ID` varchar(20) NOT NULL,
+  `score` decimal(3,0) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `user_scores`
+--
+
+INSERT INTO `user_scores` (`ID`, `date_time`, `username`, `sess_ID`, `score`) VALUES
+(1, '2014-10-03 10:38:58', 'rohman', '0310-komp-x', 50);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

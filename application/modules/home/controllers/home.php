@@ -78,64 +78,72 @@ class Home extends CI_controller  {
 
 	function default_page(){
 		$data['c']=$this;
-		$this->load->view('header');
+		$data['title']="Home";
+		$this->load->view('header',$data);
 		$this->load->view('slide',$data);
 		$this->load->view('footer');
 	}
 
 	function portofolio(){
-		$this->load->view('header');
+		$data['title']="Portofolio";
+		$this->load->view('header',$data);
 		$this->load->view('body_portofolio');
 		$this->load->view('footer');
 	}
 
 	function blog(){
-		$this->load->view('header');
+		$data['title']="Blog";
+		$this->load->view('header',$data);
 		$this->load->view('blog_body');
 		$this->load->view('footer');
 	}
 
 	function about(){
-		$this->load->view('header');
+		$data['title']="Tentang kami";
+		$this->load->view('header',$data);
 		$this->load->view('about_body');
 		$this->load->view('footer');
 	}
 
 	function contact(){
-		$this->load->view('header');
+		$data['title']="Kontak";
+		$this->load->view('header',$data);
 		$this->load->view('contak_body');
 		$this->load->view('footer');
 	}
 
 	function online_test(){
+		$data['title']="Pilih Tes";
 		$subject=$this->get_session('subject');
 		if($subject != ""){redirect(get_site_url('start'));}
 		$this->load->helper('form');
-		$this->load->view('header');
+		$this->load->view('header',$data);
 		$this->load->view('select_test');
 		$this->load->view('footer');
 	}
 
 	function start_test(){
-		$subject=$this->get_session('subject');
+		$data['title']="Bersiap!!!";
+		/*$subject=$this->get_session('subject');
 		if($subject != ""){redirect(get_site_url('start'));}
-		
+		*/
 		 $this->load->helper('form');
 		 $subject=$this->get_session('subject');
 		 $class=$this->get_session('class');
 		 $data['c']=$this;
 		 if ($subject != "" and $class != ""){
 		 	$data['datas']=$this->m_oltest->select_available_exam($subject,$class);
-			$this->load->view('header');
+			$this->load->view('header',$data);
 			$this->load->view('start_test',$data);
 			$this->load->view('footer');		 
 		 }
 	}
 	
 	function browse_scores(){
+		$data['title']="Nilai";
 		$username=$this->get_username();
 		$data['datas']=$this->m_oltest->get_scores($username);
-		$this->load->view('header');
+		$this->load->view('header',$data);
 		$this->load->view('browse_scores',$data);
 		$this->load->view('footer');
 	}
@@ -158,6 +166,7 @@ class Home extends CI_controller  {
 	}
 	
 	function start(){
+	  $data['title']="Kerjakan";
 	  $page_active=$this->get_session('no_page');
 	  $subject=$this->get_session('subject');
 	  $class=$this->get_session('class');
@@ -178,7 +187,7 @@ class Home extends CI_controller  {
 	  $data['class']=$class;
 	  $data['no_page']=$page_active;
 	  
-	  	$this->load->view('header');
+	  	$this->load->view('header',$data);
 		$this->load->view('start',$data);
 		$this->load->view('footer');	
 	}
