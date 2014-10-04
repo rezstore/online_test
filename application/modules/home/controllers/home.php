@@ -95,28 +95,28 @@ class Home extends CI_controller  {
 	function portofolio(){
 		$data['title']="Portofolio";
 		$this->load->view('header',$data);
-		$this->load->view('body_portofolio');
+		$this->load->view('portofolio');
 		$this->load->view('footer');
 	}
 
 	function blog(){
 		$data['title']="Blog";
 		$this->load->view('header',$data);
-		$this->load->view('blog_body');
+		$this->load->view('blog');
 		$this->load->view('footer');
 	}
 
 	function about(){
 		$data['title']="Tentang kami";
 		$this->load->view('header',$data);
-		$this->load->view('about_body');
+		$this->load->view('about');
 		$this->load->view('footer');
 	}
 
 	function contact(){
 		$data['title']="Kontak";
 		$this->load->view('header',$data);
-		$this->load->view('contak_body');
+		$this->load->view('contact');
 		$this->load->view('footer');
 	}
 

@@ -4,6 +4,11 @@ td.text-left{text-indent:-30px;}
 
     <div class="banner">
 	      <table class="table">
+	        <tr>
+		      <td colspan=2>
+		       <p id="timer"><?php echo "05:00"; ?></p>
+		      </td>
+		</tr>
 	      <?php
 	      echo form_open(get_site_url('check_answers'));
 	      $exam=$this->m_oltest->get_questions($subject,$class,$no_page);

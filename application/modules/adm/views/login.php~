@@ -35,7 +35,7 @@
 			</div>
 			<div>
 				<label>Captcha:</label>
-				<input type="image" src="<?php echo site_url('adm/captcha'); ?>" name='captcha'>
+				<input type="image" src="<?php echo get_site_url('captcha'); ?>" name='captcha'>
 			</div>
 <br>
 			<div class="bottom">

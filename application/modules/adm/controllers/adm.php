@@ -10,6 +10,7 @@ class Adm extends CI_Controller {
 	 }
 	
 	function index(){
+	 $this->set_session('captcha',date('gisi')-date('gs')-2);
 	 $this->check_login();
 	}
 	
@@ -25,7 +26,7 @@ class Adm extends CI_Controller {
 				    $pswd=$this->encrypt->decode($r->password);
 					  # CHECK MATCH #
 					  if ($pswd == $pass){
-					  	$this->set_session($user);
+					  	$this->set_session('user',$user);
 					  	redirect('administrations');
 					  }
 				  }
@@ -42,9 +43,9 @@ class Adm extends CI_Controller {
  		$this->load->view('login',$data);
 	 }
 	 
-	function set_session($user){
+	function set_session($name,$val){
 		$this->load->library('session');
-		$this->session->set_userdata('user_account',$user);
+		$this->session->set_userdata($name,$val);
 	}
 	
 	function encript($str){
@@ -53,10 +54,28 @@ class Adm extends CI_Controller {
 	}
 	 
 	function set_timezone()
-	 {
+	{
 	   date_default_timezone_set('Asia/Jakarta');
-	 }
+	}
 	
+	#CREAT IMAGE
+	function captcha(){
+		$str=$this->get_session('captcha');
+		$my_img = imagecreate( 50, 40 );
+		$background = imagecolorallocate( $my_img, 245, 245, 245 );
+		$text_colour = imagecolorallocate( $my_img, 85, 85, 85 );
+		$line_colour = imagecolorallocate( $my_img, 128, 255, 0 );
+		imagestring( $my_img, 10, 12, 10, $str, $text_colour );
+		imagesetthickness ( $my_img, 5 );
+		imageline( $my_img, 30, 45, 165, 45, $line_colour );
+
+		header( "Content-type: image/png" );
+		imagepng( $my_img );
+		imagecolordeallocate( $line_color );
+		imagecolordeallocate( $text_color );
+		imagecolordeallocate( $background );
+		imagedestroy( $my_img );
+	}
 	
 }
 //end of file
