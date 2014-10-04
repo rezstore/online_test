@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html>
     <head>
         <title>/_\</title>
@@ -23,19 +23,20 @@
 	  <div class="content">
 	   <div class='error' style="background:<?php echo $bg; ?>;"><?php echo $error_message; ?></div>
 		<div id="form_wrapper" class="form_wrapper">
-		  <form class="login active" action="<?php echo site_url('login/check_login'); ?>" method="POST">
+		  <form class="login active" action="<?php echo get_site_url('check_login'); ?>" method="POST">
 			<h3>Login</h3>
 			<div>
 				<label>Username:</label>
-				<input type="text" name='user' autocomplete="off" value="<?php echo $user_log; ?>" />
+				<input type="text" name='user_admin' autocomplete="off" value="<?php echo $user_log; ?>" />
 			</div>
 			<div>
 				<label>Password: <a href="#" rel="forgot_password" class="forgot linkform">Lupa password?</a></label>
-				<input type="password" name='pass' autocomplete="off" />
+				<input type="password" name='pass_admin' autocomplete="off" />
 			</div>
 			<div>
 				<label>Captcha:</label>
-				<input type="image" src="<?php echo site_url('adm/captcha'); ?>" name='captcha'>
+				<img src="<?php echo site_url('adm/captcha'); ?>"  style="margin-left:30px;">
+				<input type="text" name="captcha" autocomplete="off" placeholder="Masukkan Captcha"/>
 			</div>
 <br>
 			<div class="bottom">
