@@ -7,18 +7,7 @@ class Adm extends CI_Controller {
 		parent::__construct();
 		$this->load->helper(array('url','html'));
 		$this->load->model('m_login');
-		$this->load->helper('adm');
 	 }
-	 
-	function set_session($name,$val){
-		$this->load->library('session');
-		$this->session->set_userdata($name,$val);
-	}
-	 
-	function get_session($name){
-		$this->load->library('session');
-		return $this->session->userdata($name);
-	}
 	
 	function index(){
 	 $this->set_session('captcha',date('gisi')-date('gs')-2);
@@ -26,20 +15,19 @@ class Adm extends CI_Controller {
 	}
 	
 	function check_login(){
+		$this->load->library('encrypt');
 		if($_POST){
-			$captcha=$this->input->post('captcha');
-			$user=$this->input->post('user_admin');
-			$pass=$this->input->post('pass_admin');
-			if ($captcha != $this->get_session('captcha')) $err="maaf password atau kata sandi tidak cocok!";
-			  if ($user != '' and $pass != '' and $err == ""){
+			$user=$this->input->post('user');
+			$pass=$this->input->post('pass');
+			  if ($user != '' and $pass != ''){
 				$q1=$this->m_login->select_user_where($user);
 				if ($q1->num_rows() > 0){
 				  foreach($q1->result() as $r){
-				    $pswd=$this->encript('d',$r->password);
+				    $pswd=$this->encrypt->decode($r->password);
 					  # CHECK MATCH #
 					  if ($pswd == $pass){
-					  	$this->set_session('user_admin',$user);
-					  	redirect("administrator");
+					  	$this->set_session($user);
+					  	redirect('administrations');
 					  }
 				  }
 				}
@@ -54,15 +42,15 @@ class Adm extends CI_Controller {
 		$data['controller']=$this;
  		$this->load->view('login',$data);
 	 }
+	 
+	function set_session($name,$val){
+		$this->load->library('session');
+		$this->session->set_userdata($name,$val);
+	}
 	
-	function encript($type='',$str){
+	function encript($str){
 		$this->load->library('encrypt');
-	    if($type==""){
-			$crypt=$this->encrypt->encode($str);
-		}else{
-			$crypt=$this->encrypt->decode($str);
-		}
-		return $crypt;
+		echo $this->encrypt->encode($str);
 	}
 	 
 	function set_timezone()
@@ -73,13 +61,13 @@ class Adm extends CI_Controller {
 	#CREAT IMAGE
 	function captcha(){
 		$str=$this->get_session('captcha');
-		$my_img = imagecreate( 150, 40 );
+		$my_img = imagecreate( 50, 40 );
 		$background = imagecolorallocate( $my_img, 245, 245, 245 );
 		$text_colour = imagecolorallocate( $my_img, 85, 85, 85 );
 		$line_colour = imagecolorallocate( $my_img, 128, 255, 0 );
-		imagestring( $my_img, 10, 60, 10, substr($str,0,4), $text_colour );
+		imagestring( $my_img, 10, 12, 10, $str, $text_colour );
 		imagesetthickness ( $my_img, 5 );
-		imageline( $my_img, 30, 35, 165, 45, $line_colour );
+		imageline( $my_img, 30, 45, 165, 45, $line_colour );
 
 		header( "Content-type: image/png" );
 		imagepng( $my_img );
@@ -87,16 +75,6 @@ class Adm extends CI_Controller {
 		imagecolordeallocate( $text_color );
 		imagecolordeallocate( $background );
 		imagedestroy( $my_img );
-	}
-	
-	function crypt($type='',$str){
-	 $this->load->library('encrypt');
-	 if ($type=="d"){
-		$crypt= $this->encrypt->decode($str);
-	 }else{
-		$crypt= $this->encrypt->encode($str);
-	 }
-	 echo '::'.$crypt;
 	}
 	
 }
