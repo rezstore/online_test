@@ -49,7 +49,6 @@ class _administrator extends CI_Controller {
 		$this->load->helper('form');
 		$data['title']="admin";
 		$data['ctrl']=$this;
-		$data['datas']=$this->m_admin->select_all_exam();
 		$this->header($data);
 		$this->load_view("home",$data);
 		$this->footer($data);

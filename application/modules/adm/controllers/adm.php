@@ -31,15 +31,15 @@ class Adm extends CI_Controller {
 			$user=$this->input->post('user_admin');
 			$pass=$this->input->post('pass_admin');
 			if ($captcha != $this->get_session('captcha')) $err="maaf password atau kata sandi tidak cocok!";
-			  if ($user != '' and $pass != '' and $err == ""){
+			  if ($user != '' and $pass != '' and $captcha != ""){ 
 				$q1=$this->m_login->select_user_where($user);
 				if ($q1->num_rows() > 0){
 				  foreach($q1->result() as $r){
-				    $pswd=$this->encript('d',$r->password);
+				    echo $pswd=$this->encript('d',$r->password);
 					  # CHECK MATCH #
 					  if ($pswd == $pass){
 					  	$this->set_session('user_admin',$user);
-					  	redirect("administrator");
+					  	redirect("_administrator");
 					  }
 				  }
 				}
@@ -50,18 +50,20 @@ class Adm extends CI_Controller {
 			$data['error']=$err;
 			$data['user']=$user;
 		}
+		$this->set_session('captcha',date('sisis')-date('i')-2);
 		$this->load->helper('form');
 		$data['controller']=$this;
  		$this->load->view('login',$data);
 	 }
 	
-	function encript($type='',$str){
+	function encript($type='d',$str){
 		$this->load->library('encrypt');
-	    if($type==""){
+	    if($type=="e"){
 			$crypt=$this->encrypt->encode($str);
 		}else{
 			$crypt=$this->encrypt->decode($str);
 		}
+		echo $crypt;
 		return $crypt;
 	}
 	 
@@ -87,16 +89,6 @@ class Adm extends CI_Controller {
 		imagecolordeallocate( $text_color );
 		imagecolordeallocate( $background );
 		imagedestroy( $my_img );
-	}
-	
-	function crypt($type='',$str){
-	 $this->load->library('encrypt');
-	 if ($type=="d"){
-		$crypt= $this->encrypt->decode($str);
-	 }else{
-		$crypt= $this->encrypt->encode($str);
-	 }
-	 echo '::'.$crypt;
 	}
 	
 }

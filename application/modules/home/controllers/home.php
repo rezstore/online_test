@@ -60,6 +60,14 @@ class Home extends CI_controller  {
 
 # INDEX ----------------------------------------------------------------
 
+	function header($data){
+		$this->load->view('templates/home_header',$data);
+	}
+	
+	function footer($data){
+		$this->load->view('templates/home_footer',$data);
+	}
+	
 	function index(){
 		if($this->get_username() != ""){
 			redirect(get_site_url('default_page'));
@@ -87,37 +95,37 @@ class Home extends CI_controller  {
 	function default_page(){
 		$data['c']=$this;
 		$data['title']="Home";
-		$this->load->view('header',$data);
+		$this->header($data);
 		$this->load->view('slide',$data);
-		$this->load->view('footer');
+		$this->footer($data);
 	}
 
 	function portofolio(){
 		$data['title']="Portofolio";
-		$this->load->view('header',$data);
+		$this->header($data);
 		$this->load->view('portofolio');
-		$this->load->view('footer');
+		$this->footer($data);
 	}
 
 	function blog(){
 		$data['title']="Blog";
-		$this->load->view('header',$data);
+		$this->header($data);
 		$this->load->view('blog');
-		$this->load->view('footer');
+		$this->footer($data);
 	}
 
 	function about(){
 		$data['title']="Tentang kami";
-		$this->load->view('header',$data);
+		$this->header($data);
 		$this->load->view('about');
-		$this->load->view('footer');
+		$this->footer($data);
 	}
 
 	function contact(){
 		$data['title']="Kontak";
-		$this->load->view('header',$data);
+		$this->header($data);
 		$this->load->view('contact');
-		$this->load->view('footer');
+		$this->footer($data);
 	}
 
 	function online_test(){
@@ -125,9 +133,9 @@ class Home extends CI_controller  {
 		$subject=$this->get_session('subject');
 		if($subject != ""){redirect(get_site_url('start'));}
 		$this->load->helper('form');
-		$this->load->view('header',$data);
+		$this->header($data);
 		$this->load->view('select_test');
-		$this->load->view('footer');
+		$this->footer($data);
 	}
 
 	function start_test(){
@@ -141,9 +149,9 @@ class Home extends CI_controller  {
 		 $data['c']=$this;
 		 if ($subject != "" and $class != ""){
 		 	$data['datas']=$this->m_oltest->select_available_exam($subject,$class);
-			$this->load->view('header',$data);
+			$this->header($data);
 			$this->load->view('start_test',$data);
-			$this->load->view('footer');		 
+			$this->footer($data);		 
 		 }
 	}
 	
@@ -151,9 +159,9 @@ class Home extends CI_controller  {
 		$data['title']="Nilai";
 		$username=$this->get_username();
 		$data['datas']=$this->m_oltest->get_scores($username);
-		$this->load->view('header',$data);
+		$this->header($data);
 		$this->load->view('browse_scores',$data);
-		$this->load->view('footer');
+		$this->footer($data);
 	}
 	
 # OPERATIONS ======================================================
@@ -195,9 +203,9 @@ class Home extends CI_controller  {
 	  $data['class']=$class;
 	  $data['no_page']=$page_active;
 	  
-	  	$this->load->view('header',$data);
+	  	$this->header($data);
 		$this->load->view('start',$data);
-		$this->load->view('footer');	
+		$this->footer($data);	
 	}
 	
 	function check_answers(){

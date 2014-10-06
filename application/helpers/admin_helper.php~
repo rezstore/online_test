@@ -39,22 +39,27 @@ function get_site_url($pagename=''){
 
 #----------------------------------------------------------------------
 function input($name='',$value='',$class=''){
+ $this->load->helper('form');
  return form_input($name,$value,'class="form_control" '.$class);
 }
 
 function dropdown($name='',$arr=array(),$value='',$class=''){
+ $this->load->view('form');
  return form_dropdown($name,$arr,$value,'class="form_control" '.$class);
 }
 
 function textarea($name='',$value='',$class=''){
+ $this->load->helper('form');
  return form_textarea($name,$value,'class="form_control" '.$class);
 }
 
 function upload($name='',$value='',$class=''){
+ $this->load->helper('form');
  return form_upload($name,$value,'class="form_control" '.$class);
 }
 
 function submit($name='',$value='',$class=''){
+ $this->load->helper('form');
  return form_submit($name,$value,'class="form_control" '.$class);
 }
 
