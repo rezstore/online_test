@@ -13,6 +13,26 @@ class Adm extends CI_Controller {
 	 $this->set_session('captcha',date('gisi')-date('gs')-2);
 	 $this->check_login();
 	}
+	 
+	function set_session($name,$val){
+		$this->load->library('session');
+		$this->session->set_userdata($name,$val);
+	}
+	 
+	function get_session($name){
+		$this->load->library('session');
+		$this->session->userdata($name);
+	}
+	
+	function encript($str){
+		$this->load->library('encrypt');
+		echo $this->encrypt->encode($str);
+	}
+	 
+	function set_timezone()
+	{
+	   date_default_timezone_set('Asia/Jakarta');
+	}
 	
 	function check_login(){
 		$this->load->library('encrypt');
@@ -26,7 +46,7 @@ class Adm extends CI_Controller {
 				    $pswd=$this->encrypt->decode($r->password);
 					  # CHECK MATCH #
 					  if ($pswd == $pass){
-					  	$this->set_session($user);
+					  	$this->set_session('user',$user);
 					  	redirect('administrations');
 					  }
 				  }
@@ -42,21 +62,6 @@ class Adm extends CI_Controller {
 		$data['controller']=$this;
  		$this->load->view('login',$data);
 	 }
-	 
-	function set_session($name,$val){
-		$this->load->library('session');
-		$this->session->set_userdata($name,$val);
-	}
-	
-	function encript($str){
-		$this->load->library('encrypt');
-		echo $this->encrypt->encode($str);
-	}
-	 
-	function set_timezone()
-	{
-	   date_default_timezone_set('Asia/Jakarta');
-	}
 	
 	#CREAT IMAGE
 	function captcha(){
