@@ -2,13 +2,21 @@
 class M_admin extends CI_Model
 {
   
-  function select_exam($user_ID)
+  function select_subjects()
    {
-   	$user=$this->db->escape($user_ID);
    	$sql="SELECT * 
-		FROM exam_questions 
-		GROUP BY user_ID, subject_code, class_code";
+		FROM subjects
+		WHERE status = 1";
   	return $this->db->query($sql);
+   }
+   
+   function select_all_exam(){
+		$sql="SELECT * ,COUNT(exam_questions.exam_ID) as jumlah_soal,adm_users.username as subscriber
+		FROM exam_questions LEFT JOIN subjects ON exam_questions.subject_code=subjects.subject_code
+		LEFT JOIN adm_users ON adm_users.ID=exam_questions.user_ID
+		GROUP BY exam_questions.subject_code, exam_questions.class_code";
+  	return $this->db->query($sql);
+
    }
 
 

@@ -58,4 +58,8 @@ function submit($name='',$value='',$class=''){
  return form_submit($name,$value,'class="form_control" '.$class);
 }
 
+function button($name='',$value='',$class=''){
+ return form_button($name,$value,$class);
+}
+
 ?>

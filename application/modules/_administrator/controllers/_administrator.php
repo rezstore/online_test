@@ -34,7 +34,7 @@ class _administrator extends CI_Controller {
 	}
 	
 	function footer($data){
-	 $this->load->view('templates/admin_footer',$data);
+	 //$this->load->view('templates/admin_footer',$data);
 	}
 	
 	function load_view($filename,$data){
