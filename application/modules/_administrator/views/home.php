@@ -21,7 +21,7 @@
   <td><?php echo input('jumlah_soal','','style="width:100px;"'); ?></td>
   <td><?php echo input('waktu',' ','style="width:100px;"'); ?></td>
   <td><?php echo input('user','',''); ?></td>
-  <td><?php echo button('user','Cari','class="btn btn-primary" '); ?></td>
+  <td><?php echo button('user','Cari','class="btn btn-warning" '); ?></td>
  </tr>
  <?php
   $n=1;

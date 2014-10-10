@@ -64,6 +64,10 @@ class Home extends CI_controller  {
 		$this->load->view('templates/home_header',$data);
 	}
 	
+	function footer($data){
+		$this->load->view('templates/home_footer',$data);
+	}
+	
 	function index(){
 		if($this->get_username() != ""){
 			redirect(get_site_url('default_page'));
@@ -105,6 +109,7 @@ class Home extends CI_controller  {
 
 	function blog(){
 		$data['title']="Blog";
+		$data['datas']=$this->m_oltest->get_blog();
 		$this->header($data);
 		$this->load->view('blog');
 		$this->footer($data);

@@ -95,20 +95,16 @@ class Home extends CI_controller  {
 	function default_page(){
 		$data['c']=$this;
 		$data['title']="Home";
+		$data['active']="home";
 		$this->header($data);
 		$this->load->view('slide',$data);
 		$this->footer($data);
 	}
 
-	function portofolio(){
-		$data['title']="Portofolio";
-		$this->header($data);
-		$this->load->view('portofolio');
-		$this->footer($data);
-	}
-
 	function blog(){
 		$data['title']="Blog";
+		$data['active']="blog";
+		$data['datas']=$this->m_oltest->get_blog();
 		$this->header($data);
 		$this->load->view('blog');
 		$this->footer($data);
@@ -116,6 +112,7 @@ class Home extends CI_controller  {
 
 	function about(){
 		$data['title']="Tentang kami";
+		$data['active']="about";
 		$this->header($data);
 		$this->load->view('about');
 		$this->footer($data);
@@ -123,6 +120,7 @@ class Home extends CI_controller  {
 
 	function contact(){
 		$data['title']="Kontak";
+		$data['active']="contact";
 		$this->header($data);
 		$this->load->view('contact');
 		$this->footer($data);
@@ -130,6 +128,7 @@ class Home extends CI_controller  {
 
 	function online_test(){
 		$data['title']="Pilih Tes";
+		$data['active']="home";
 		$subject=$this->get_session('subject');
 		if($subject != ""){redirect(get_site_url('start'));}
 		$this->load->helper('form');
@@ -140,6 +139,7 @@ class Home extends CI_controller  {
 
 	function start_test(){
 		$data['title']="Bersiap!!!";
+		$data['active']="home";
 		/*$subject=$this->get_session('subject');
 		if($subject != ""){redirect(get_site_url('start'));}
 		*/
@@ -157,6 +157,7 @@ class Home extends CI_controller  {
 	
 	function browse_scores(){
 		$data['title']="Nilai";
+		$data['active']="home";
 		$username=$this->get_username();
 		$data['datas']=$this->m_oltest->get_scores($username);
 		$this->header($data);
@@ -184,6 +185,7 @@ class Home extends CI_controller  {
 	
 	function start(){
 	  $data['title']="Kerjakan";
+		$data['active']="home";
 	  $page_active=$this->get_session('no_page');
 	  $subject=$this->get_session('subject');
 	  $class=$this->get_session('class');

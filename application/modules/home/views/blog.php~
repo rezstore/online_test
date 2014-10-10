@@ -2,7 +2,7 @@
     <!-- start content -->
 	 <div class="main1">
 	 	 <div class="content">
-	 	 	<h2>INDOTES BLOG</h2><i>Hargai Ilmu Walau Hanya Satu Kata<i>
+	 	 	<h2>INDOTES BLOG</h2><u>Hargai Ilmu Walau Hanya Satu Kata<i>
 	 	 </div>
 		<div class="blog">
 		<?php

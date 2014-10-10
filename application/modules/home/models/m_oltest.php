@@ -127,6 +127,11 @@ class m_oltest extends CI_Model{
  	return $q;
  }
  
+ function get_blog(){
+ 	$sql="SELECT * FROM blog WHERE status=1";
+ 	$q=$this->db->query($sql);
+ 	return $q;
+ }
  
  
 

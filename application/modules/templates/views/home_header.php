@@ -41,6 +41,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </script>
 </head>
 <body>
+<?php
+$contact_active="";
+$blog_active="";
+$about_active="";
+$home_active="";
+
+if ($active == "contact"){
+ $contact_active=" class='active'";
+}elseif ($active == "blog"){
+ $blog_active=" class='active'";
+}elseif ($active == "about"){
+ $about_active=" class='active'";
+}else{
+ $home_active=" class='active'";
+}
+?>
 <div class="body">
 <div class="wrap">
 <div class="wrapper">
@@ -51,11 +67,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<div class="cssmenu">
 			<ul>
-			  	<li class="active"><a href="<?php echo get_site_url('');?>">Home</a></li>
-				<li><a href="<?php echo get_site_url('blog');?>">Blog</a></li>
-				<li ><a href="<?php echo get_site_url('about');?>">About</a></li>
-				<li ><a href="<?php echo get_site_url('contact');?>">Contact</a></li>
-				<li ><a href="<?php echo get_site_url('logout');?>" style="color:red;">Logout</a></li>
+			  	<li<?php echo $home_active; ?>><a href="<?php echo get_site_url('');?>">Home</a></li>
+				<li<?php echo $blog_active; ?>><a href="<?php echo get_site_url('blog');?>">Blog</a></li>
+				<li<?php echo $about_active; ?> ><a href="<?php echo get_site_url('about');?>">About</a></li>
+				<li<?php echo $contact_active; ?> ><a href="<?php echo get_site_url('contact');?>">Contact</a></li>
+				<li><a href="<?php echo get_site_url('logout');?>" style="color:red;">Logout</a></li>
 				<div class="clear"></div>
 			 </ul>
 		</div>
