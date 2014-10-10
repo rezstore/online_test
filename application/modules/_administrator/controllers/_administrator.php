@@ -42,16 +42,33 @@ class _administrator extends CI_Controller {
 	}
 	
 	function index(){
-	 echo "(*_*)";
+	 $this->home();
 	}
 	
 	function home(){
+		$data['title']="Home";
+		$this->header($data);
+		$this->load_view("home",$data);
+		$this->footer($data);
+	}
+	
+	function exam(){
 		$this->load->helper('form');
 		$data['title']="admin";
 		$data['ctrl']=$this;
 		$data['datas']=$this->m_admin->select_all_exam();
 		$this->header($data);
-		$this->load_view("home",$data);
+		$this->load_view("exam",$data);
+		$this->footer($data);
+	}
+	
+	function exam_detail($ID){
+		$this->load->helper('form');
+		$data['title']="Exam Detile";
+		$data['ctrl']=$this;
+		$data['datas']=$this->m_admin->select_all_exam($ID);
+		$this->header($data);
+		$this->load_view("exam",$data);
 		$this->footer($data);
 	}
 	
