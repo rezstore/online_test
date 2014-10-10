@@ -20,7 +20,7 @@
 						agar nanti mendapat hasil yang maksimal dan lebih baik. dengan tujuan utama kami 
 						meluluskan siswa dalam setiap ujian yang ada di sekolah maupun ujian nasional");?></p>
 					<div class="read_more">
-						<a class="btn btn-primary" href="<?php echo get_site_url(); ?>">Kembali Ke home</a>
+						<a class="btn btn-primary" href="">Kembali Ke home</a>
 					</div>
 					
 				</div>

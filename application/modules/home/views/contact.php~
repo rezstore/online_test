@@ -5,11 +5,7 @@
 	 	 <div class="contact">				
 				<div class="contact_info">
 		    	 		<div class="map">
-				   		<iframe width="100%" height="175" frameborder="0" scrolling="no" 
-				   			marginheight="0" marginwidth="0" 
-				   			src="https://www.google.co.id/maps/place/Jalan+Raya+Sulfat,+Blimbing,
-				   			+Kota+Malang,+Jawa+Timur+65126/@-7.9602071,112.6494709,17z/
-				   			data=!3m1!4b1!4m2!3m1!1s0x2dd629b4a8868c6f:0x5bc5c98eb1663be5"></iframe><br><small><a href="https://www.google.co.id/maps/place/Jalan+Raya+Sulfat,+Blimbing,+Kota+Malang,+Jawa+Timur+65126/@-7.9602071,112.6494709,17z/data=!3m1!4b1!4m2!3m1!1s0x2dd629b4a8868c6f:0x5bc5c98eb1663be5" style="color:#666;text-align:left;font-size:0.85em">View Larger Map</a></small>
+				   		<iframe width="100%" height="175" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.co.id/maps/place/Jalan+Raya+Sulfat,+Blimbing,+Kota+Malang,+Jawa+Timur+65126/@-7.9602071,112.6494709,17z/data=!3m1!4b1!4m2!3m1!1s0x2dd629b4a8868c6f:0x5bc5c98eb1663be5"></iframe><br><small><a href="https://www.google.co.id/maps/place/Jalan+Raya+Sulfat,+Blimbing,+Kota+Malang,+Jawa+Timur+65126/@-7.9602071,112.6494709,17z/data=!3m1!4b1!4m2!3m1!1s0x2dd629b4a8868c6f:0x5bc5c98eb1663be5" style="color:#666;text-align:left;font-size:0.85em">View Larger Map</a></small>
 				   	</div>
       				</div>
 				  <div class="contact-form">
