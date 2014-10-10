@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 06, 2014 at 08:17 AM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Host: localhost
+-- Generation Time: Oct 10, 2014 at 08:08 PM
+-- Server version: 5.5.38-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -32,14 +32,39 @@ CREATE TABLE IF NOT EXISTS `adm_users` (
   `password` tinytext NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `adm_users`
 --
 
 INSERT INTO `adm_users` (`ID`, `username`, `password`, `status`) VALUES
-(1, 'rohman', 'AGj2B7WLZClSyJg/PgV2UxIZ2G1vwrvi5SB4xur8p/EieVE6A/w8owYyjUVAynmSg1paZUqMELvJxbrCUwaKSg==', 1);
+(1, 'rohmanlp', 'AGj2B7WLZClSyJg/PgV2UxIZ2G1vwrvi5SB4xur8p/EieVE6A/w8owYyjUVAynmSg1paZUqMELvJxbrCUwaKSg==', 1),
+(2, 'rohmanpc', 'UzwDPFB2AiEAPA', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog`
+--
+
+CREATE TABLE IF NOT EXISTS `blog` (
+  `ID_blog` int(11) NOT NULL AUTO_INCREMENT,
+  `post_date` date NOT NULL DEFAULT '2014-10-10',
+  `blog_title` varchar(100) NOT NULL,
+  `blog_content` text NOT NULL,
+  `blog_url` text NOT NULL,
+  `blog_image` varchar(30) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`ID_blog`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `blog`
+--
+
+INSERT INTO `blog` (`ID_blog`, `post_date`, `blog_title`, `blog_content`, `blog_url`, `blog_image`, `status`) VALUES
+(1, '2014-10-16', 'belajar mengerjakan bahasa inggris', 'belajhasa inggrisrisbelbelajar mengerjggrisn bahasa inggrisriselajar mengerjakan bahasa inggrisbelajar mengerjbelajar mengerjakan bahasa inggrisakan bahasa inggrisbelajar belajar mengerjakan bahasa belajar mengerjakan bahasa inggrisinggrismengerjakan bahasa inggrisbelabelajar mengerjakan bahasa inggrisjar mengerjakan bahabelajar mengerjakan bahasa inggrissa inggrisbelajar mengerjakan bahasa inggrisbelabelajar mengerjakan bahasa inggrisjar mengerjakan bahasa inggris', 'belajar mengerjakan bahasa inggris', 'inggris.png', 1);
 
 -- --------------------------------------------------------
 
@@ -133,6 +158,7 @@ INSERT INTO `correct_answer` (`ID`, `exam_ID`, `answer`) VALUES
 
 CREATE TABLE IF NOT EXISTS `exam_questions` (
   `exam_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `user_ID` varchar(11) NOT NULL,
   `subject_code` varchar(20) NOT NULL,
   `class_code` varchar(5) NOT NULL,
   `exam_content` text NOT NULL,
@@ -144,16 +170,16 @@ CREATE TABLE IF NOT EXISTS `exam_questions` (
 -- Dumping data for table `exam_questions`
 --
 
-INSERT INTO `exam_questions` (`exam_ID`, `subject_code`, `class_code`, `exam_content`, `status`) VALUES
-(1, 'mat', 'vii', 'dasdasdasdasd', 1),
-(2, 'mat', 'viii', 'asdasdasdaa123', 1),
-(3, 'mat', 'vii', 'dasdasdasdasd3123123', 1),
-(4, 'komp', 'x', 'Apa yang dimaksud dengan bahasa pemrograman?', 1),
-(5, 'komp', 'x', 'Mengapa bahasa pemrograman sangat digemari?', 1),
-(6, 'komp', 'x', 'Ada berapa macam Bahasa pemrograman yang berbasis object?', 1),
-(7, 'komp', 'x', 'Siapa penemu bahasa pemrograman C?', 1),
-(8, 'komp', 'x', 'Apa yang dimaksud dengan webserver?', 1),
-(9, 'komp', 'x', 'siapa penemu webserver?', 1);
+INSERT INTO `exam_questions` (`exam_ID`, `user_ID`, `subject_code`, `class_code`, `exam_content`, `status`) VALUES
+(1, '4', 'mat', 'vii', 'dasdasdasdasd', 1),
+(2, '3', 'mat', 'viii', 'asdasdasdaa123', 1),
+(3, '2', 'mat', 'vii', 'dasdasdasdasd3123123', 1),
+(4, '2', 'komp', 'x', 'Apa yang dimaksud dengan bahasa pemrograman?', 1),
+(5, '2', 'komp', 'x', 'Mengapa bahasa pemrograman sangat digemari?', 1),
+(6, '2', 'komp', 'x', 'Ada berapa macam Bahasa pemrograman yang berbasis object?', 1),
+(7, '2', 'komp', 'x', 'Siapa penemu bahasa pemrograman C?', 1),
+(8, '2', 'komp', 'x', 'Apa yang dimaksud dengan webserver?', 1),
+(9, '2', 'komp', 'x', 'siapa penemu webserver?', 1);
 
 -- --------------------------------------------------------
 
@@ -192,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `temporary_user_answers` (
   `answer` varchar(1) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
 
 --
 -- Dumping data for table `temporary_user_answers`
@@ -210,7 +236,13 @@ INSERT INTO `temporary_user_answers` (`ID`, `sess_ID`, `date_time`, `user`, `exa
 (56, '03100932-komp-x', '2014-10-03 15:10:25', 'rohman', '6', 'A', 1),
 (57, '03100932-komp-x', '2014-10-03 15:10:25', 'rohman', '7', 'A', 0),
 (58, '03100932-komp-x', '2014-10-03 15:10:25', 'rohman', '8', 'A', 1),
-(59, '03100932-komp-x', '2014-10-03 15:10:30', 'rohman', '9', 'E', 0);
+(59, '03100932-komp-x', '2014-10-03 15:10:30', 'rohman', '9', 'E', 0),
+(60, '06105311-komp-x', '2014-10-06 13:53:22', 'asdasd', '4', 'E', 0),
+(61, '06105311-komp-x', '2014-10-06 13:53:22', 'asdasd', '5', 'A', 0),
+(62, '06105311-komp-x', '2014-10-06 13:53:22', 'asdasd', '6', 'A', 1),
+(63, '06105311-komp-x', '2014-10-06 13:53:22', 'asdasd', '7', 'D', 0),
+(64, '06105311-komp-x', '2014-10-06 13:53:22', 'asdasd', '8', 'A', 1),
+(65, '06105311-komp-x', '2014-10-06 13:53:25', 'asdasd', '9', 'A', 0);
 
 -- --------------------------------------------------------
 
@@ -224,7 +256,15 @@ CREATE TABLE IF NOT EXISTS `user_accounts` (
   `email` varchar(100) NOT NULL,
   `status` tinyint(4) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `user_accounts`
+--
+
+INSERT INTO `user_accounts` (`ID`, `username`, `email`, `status`) VALUES
+(1, 'asdasd', 'rezstoreindonesia@gmail.com', 0),
+(2, 'rohman', 'rohmanahmad123@yahoo.com', 0);
 
 -- --------------------------------------------------------
 
@@ -239,17 +279,18 @@ CREATE TABLE IF NOT EXISTS `user_scores` (
   `sess_ID` varchar(20) NOT NULL,
   `score` decimal(3,0) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `user_scores`
 --
 
 INSERT INTO `user_scores` (`ID`, `date_time`, `username`, `sess_ID`, `score`) VALUES
-(1, '2014-10-03 10:38:58', 'rohman', '0310-komp-x', '50'),
-(3, '2014-10-03 14:55:04', 'rohman', '0310-komp-x', '67'),
-(4, '2014-10-03 14:56:21', 'rohman', '0310-komp-x', '67'),
-(5, '2014-10-03 15:10:30', 'rohman', '03100932-komp-x', '50');
+(1, '2014-10-03 10:38:58', 'rohman', '0310-komp-x', 50),
+(3, '2014-10-03 14:55:04', 'rohman', '0310-komp-x', 67),
+(4, '2014-10-03 14:56:21', 'rohman', '0310-komp-x', 67),
+(5, '2014-10-03 15:10:30', 'rohman', '03100932-komp-x', 50),
+(6, '2014-10-06 13:53:25', 'asdasd', '06105311-komp-x', 34);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
