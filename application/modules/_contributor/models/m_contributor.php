@@ -67,22 +67,30 @@ class M_contributor extends CI_Model
 	return $q;
    }
    
-   function insert_new($username,$mapel,$soal, $a, $b, $c, $d, $e, $true){
+   function insert_new($username,$mapel,$soal){
     $s=explode('-',$mapel);
     //echo var_dump($s);
     $soal=$this->escape($soal);
     $subject=$this->escape($s[0]);
     $class=$this->escape($s[1]);
     $user=$this->select_user_ID($username);
-    $a=$this->escape($a);
-    $b=$this->escape($b);
-    $c=$this->escape($c);
-    $d=$this->escape($d);
-    $e=$this->escape($e);
-    $true=$this->escape($true);
+    
     $sql="INSERT INTO exam_questions (`user_ID`,`subject_code`,`class_code`,`exam_content`) 
     		VALUES ($user,$subject,$class,$soal)";
-    	$this->db->query($sql);
+    $this->db->query($sql);
+   }
+   
+   function insert_answer_options($exam_id, $a, $b, $c, $d, $e, $true){
+	$id=$this->escape($exam_id);
+	$a=$this->escape($a);
+	$b=$this->escape($b);
+	$c=$this->escape($c);
+	$d=$this->escape($d);
+	$e=$this->escape($e);
+	$true=$this->escape($true);
+	$sql="INSERT INTO `choice_answers` (`exam_ID`, `a`, `b`, `c`, `d`, `e`) 
+		VALUES ($id, $a, $b, $c, $d, $e)";
+	$this->db->query($sql);
    }
 
 

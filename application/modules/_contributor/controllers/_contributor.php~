@@ -112,6 +112,7 @@ class _contributor extends CI_Controller {
 		 $e=str_replace("../",'',$this->input->post('jawab_e'));
 		 $true=$this->input->post('jawab_true');
 		 if ($soal !== "" and $mapel !== ""){
+		 	$this->m_contributor->insert_new($this->check_username(),$mapel,$soal);
 		 	$this->m_contributor->insert_new($this->check_username(),$mapel,$soal, $a, $b, $c, $d, $e, $true);
 		 	//$this->unset_sessions("NOT_ALL",array('mapel'));
 		 }
