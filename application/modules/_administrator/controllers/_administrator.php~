@@ -21,10 +21,25 @@ class _administrator extends CI_Controller {
 		return $this->session->userdata($name);
 	}
 	
+	function unset_sessions($all="ALL"){
+		$this->load->library('session');
+		if($all == "ALL"){
+			$arr=array("user_subscriber");
+			foreach($arr as $name){
+			  $this->session->unset_userdata($name);
+			}
+		}
+	}
+	
 	function check_username(){
 	  $user=$this->get_session('user_admin');
 	  if($user == "")redirect("adm");
 	  return $user;
+	}
+
+# LOGOUT
+	function logout(){
+		$this->unset_sessions();
 	}
 	
 # LOADING MAIN VIEWS
@@ -34,7 +49,7 @@ class _administrator extends CI_Controller {
 	}
 	
 	function footer($data){
-	 $this->load->view('templates/admin_footer',$data);
+	 //$this->load->view('templates/admin_footer',$data);
 	}
 	
 	function load_view($filename,$data){
@@ -42,15 +57,33 @@ class _administrator extends CI_Controller {
 	}
 	
 	function index(){
-	 echo "(*_*)";
+	 $this->home();
 	}
 	
 	function home(){
+		$data['title']="Home";
+		$this->header($data);
+		$this->load_view("home",$data);
+		$this->footer($data);
+	}
+	
+	function exam(){
 		$this->load->helper('form');
 		$data['title']="admin";
 		$data['ctrl']=$this;
+		$data['datas']=$this->m_admin->select_all_exam();
 		$this->header($data);
-		$this->load_view("home",$data);
+		$this->load_view("exam",$data);
+		$this->footer($data);
+	}
+	
+	function exam_detail($ID){
+		$this->load->helper('form');
+		$data['title']="Exam Detile";
+		$data['ctrl']=$this;
+		$data['datas']=$this->m_admin->select_all_exam($ID);
+		$this->header($data);
+		$this->load_view("exam",$data);
 		$this->footer($data);
 	}
 	

@@ -3,6 +3,7 @@ define('EXTR', '..'.pathinfo(__FILE__, PATHINFO_EXTENSION));
 define('MYPATH', __FILE__);
 define('SELFS', pathinfo(__FILE__, PATHINFO_BASENAME));
 define('PUBPATH',str_replace(SELFS,'',MYPATH));
+session_start();$_SESSION['path_upload']=PUBPATH;
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

@@ -21,10 +21,25 @@ class _administrator extends CI_Controller {
 		return $this->session->userdata($name);
 	}
 	
+	function unset_sessions($all="ALL"){
+		$this->load->library('session');
+		if($all == "ALL"){
+			$arr=array("user_admin");
+			foreach($arr as $name){
+			  $this->session->unset_userdata($name);
+			}
+		}
+	}
+	
 	function check_username(){
 	  $user=$this->get_session('user_admin');
 	  if($user == "")redirect("adm");
 	  return $user;
+	}
+
+# LOGOUT
+	function logout(){
+		$this->unset_sessions();
 	}
 	
 # LOADING MAIN VIEWS

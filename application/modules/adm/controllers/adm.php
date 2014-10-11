@@ -35,11 +35,21 @@ class Adm extends CI_Controller {
 				$q1=$this->m_login->select_user_where($user);
 				if ($q1->num_rows() > 0){
 				  foreach($q1->result() as $r){
-				    echo $pswd=$this->encript('d',$r->password);
+				    $pswd=$this->encript('d',$r->password);
+				    $level=$r->level;
 					  # CHECK MATCH #
 					  if ($pswd == $pass){
+					    #CHECK LEVEL
+					     // identifikasi admin,contributor
+					      if($level == "adm"){
 					  	$this->set_session('user_admin',$user);
 					  	redirect("_administrator");
+					  	exit;
+					      }else{
+					      	$this->set_session('user_contributor',$user);
+					  	redirect("_contributor");
+					  	exit;
+					      }
 					  }
 				  }
 				}
