@@ -6,12 +6,12 @@
   <th>Jumlah Soal</th>
   <th>Waktu</th>
   <th>Posted By</th>
-  <th></th>
+  <th><button class="btn">New</button></th>
  </tr>
  <tr>
   <td></td>
   <td><?php 
-  	$map=$this->m_admin->select_subjects();
+  	$map=$this->m_contributor->select_subjects();
 	$arr_drp=array("0"=>"All");
 	foreach($map->result() as $r){
 	 $arr_drp[$r->subject_code]=$r->subject_name;
@@ -20,7 +20,7 @@
   	?>
   </td>
   <td><?php 
-		$class=$this->m_admin->select_class();
+		$class=$this->m_contributor->select_class();
 		$arr_kelas=array(""=>"All");
 		foreach($class->result() as $r){
 		 $arr_kelas[$r->class_code]=$r->class_name;

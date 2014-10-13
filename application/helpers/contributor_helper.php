@@ -60,7 +60,7 @@ function upload($name='',$value='',$class=''){
 }
 
 function submit($name='',$value='',$class=''){
- return form_submit($name,$value,'class="form_control" '.$class);
+ return form_submit($name,$value,$class);
 }
 
 function button($name='',$value='',$class=''){

@@ -6,7 +6,7 @@
   <th>Jumlah Soal</th>
   <th>Waktu</th>
   <th>Posted By</th>
-  <th></th>
+  <th><?php echo anchor(get_site_url("new_exam"),'<button class="btn">New</button>');?></th>
  </tr>
  <tr>
   <td></td>

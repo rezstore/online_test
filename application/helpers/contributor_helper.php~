@@ -52,7 +52,7 @@ function dropdown($name='',$arr=array(),$value='',$class=''){
 }
 
 function textarea($name='',$value='',$class=''){
- return form_textarea($name,$value,'class="form_control" '.$class);
+ return form_textarea($name,$value,"class=$class");
 }
 
 function upload($name='',$value='',$class=''){

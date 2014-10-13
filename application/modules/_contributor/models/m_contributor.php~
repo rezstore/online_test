@@ -43,19 +43,25 @@ class M_contributor extends CI_Model
 	foreach($this->db->query($sql)->result() as $r){
 		$mapel=$this->escape($r->subject_code);
 		$class=$this->escape($r->class_code);
-		$sql="SELECT exam_questions.exam_ID ,exam_questions.subject_code ,exam_questions.class_code ,exam_questions.exam_content , 
+		echo $sql="SELECT exam_questions.exam_ID ,
+					exam_questions.subject_code ,
+					exam_questions.class_code ,
+					exam_questions.exam_content , 
 			choice_answers.a,
 			choice_answers.b,
 			choice_answers.c,
 			choice_answers.d,
 			choice_answers.e,
-			correct_answer.answer ,adm_users.username as subscriber
+				correct_answer.answer ,
+				adm_users.username as subscriber
 		FROM exam_questions 
 		LEFT JOIN subjects ON exam_questions.subject_code=subjects.subject_code
 		LEFT JOIN adm_users ON adm_users.ID=exam_questions.user_ID
 		LEFT JOIN choice_answers ON choice_answers.exam_ID = exam_questions.exam_ID
 		LEFT JOIN correct_answer ON correct_answer.exam_ID = exam_questions.exam_ID
-		 WHERE exam_questions.class_code=$class and exam_questions.subject_code=$mapel and adm_users.username = $username";
+		 	WHERE exam_questions.class_code=$class 
+		 		and exam_questions.subject_code=$mapel 
+		 		and adm_users.username = $username";
 		return $this->db->query($sql);
 		exit;
 	}
@@ -90,8 +96,67 @@ class M_contributor extends CI_Model
 	$true=$this->escape($true);
 	$sql="INSERT INTO `choice_answers` (`exam_ID`, `a`, `b`, `c`, `d`, `e`) 
 		VALUES ($id, $a, $b, $c, $d, $e)";
-	$this->db->query($sql);
+	$sql_answer="INSERT INTO correct_answer (`exam_ID`,`answer`) VALUES ($id,$true)";
+	if($this->db->query($sql)){
+		$this->db->query($sql_answer);
+	}
    }
+   
+   function select_all_exam_where($id){
+	$id=$this->escape($id);
+	$sql="SELECT exam_questions.exam_content ,choice_answers.*,correct_answer.answer 
+			FROM exam_questions
+			LEFT JOIN choice_answers ON choice_answers.exam_ID = exam_questions.exam_ID
+			LEFT JOIN correct_answer ON correct_answer.exam_ID = exam_questions.exam_ID
+			WHERE exam_questions.exam_ID=$id LIMIT 1";
+	return $this->db->query($sql);
+   }
+   
+   function update_exam_question($user_ID,$id,$question,$a,$b,$c,$d,$e,$answer){
+	$user=$this->escape($user_ID);
+	$id=$this->escape($id);
+	$question=$this->escape($question);
+	$a=$this->escape($a);
+	$b=$this->escape($b);
+	$c=$this->escape($c);
+	$d=$this->escape($d);
+	$e=$this->escape($e);
+	$answer=$this->escape($answer);
+	$update_question="UPDATE exam_questions SET exam_content=$question WHERE exam_ID=$id and user_ID=$user";
+	$update_answer_option="UPDATE choice_answers SET a=$a,b=$b,c=$c,d=$d,e=$e WHERE exam_ID=$id";
+	$update_answer="UPDATE correct_answer SET answer=$answer WHERE exam_ID=$id";
+	if($this->db->query($update_question)){
+		if($this->db->query($update_answer_option)){
+			$this->db->query($update_answer);
+		}
+	}
+   }
+   
+   function delete_exam($id){
+	$id=$this->escape($id);
+	$sql="DELETE FROM exam_questions WHERE exam_ID=$id ";
+	$sql_delete_answer_opt="DELETE FROM choice_answers WHERE exam_ID=$id";
+	$sql_answer="DELETE FROM correct_answer WHERE exam_ID=$id";
+	if($this->db->query($sql)){
+		if($this->db->query($sql_delete_answer_opt)){
+			$this->db->query($sql_answer);
+		}
+	}
+   }
+   
+   function select_ID_question($user_ID,$mapel,$soal){
+   	$user_id=$this->escape($user_ID);
+		$s=explode('-',$mapel);
+		$subject=$this->escape($s[0]);
+		$class=$this->escape($s[1]);
+   	$soal=$this->escape($soal);
+   	echo $sql="SELECT exam_ID FROM exam_questions WHERE user_ID=$user_id and subject_code=$subject and class_code=$class ORDER BY exam_ID DESC LIMIT 1";
+   	$q=$this->db->query($sql);
+   	foreach($q->result() as $r){
+   		return $r->exam_ID;
+   	}
+   }
+   
 
 
 }
