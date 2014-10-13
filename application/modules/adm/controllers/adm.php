@@ -20,6 +20,11 @@ class Adm extends CI_Controller {
 		return $this->session->userdata($name);
 	}
 	
+	function destroy(){
+		$this->load->library('session');
+		$this->session->sess_destroy();
+	}
+	
 	function index(){
 	 $this->set_session('captcha',date('gisi')-date('gs')-2);
 	 $this->check_login();
@@ -42,12 +47,12 @@ class Adm extends CI_Controller {
 					    #CHECK LEVEL
 					     // identifikasi admin,contributor
 					      if($level == "adm"){
-					  	$this->set_session('user_admin',$user);
-					  	redirect("_administrator");
+							$this->set_session(SESSION_ADMIN,$user);
+							redirect("_administrator");
 					  	exit;
 					      }else{
-					      	$this->set_session('user_contributor',$user);
-					  	redirect("_contributor");
+					      	$this->set_session(SESSION_CONTRIB,$user);
+							redirect("_contributor");
 					  	exit;
 					      }
 					  }

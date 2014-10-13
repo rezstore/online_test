@@ -17,7 +17,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="<?php echo get_common('css/admin.css');?>" rel="stylesheet" type="text/css" media="all" />
 <link href="<?php echo get_css_jquery('jquery-ui.css');?>" rel="stylesheet" type="text/css" media="all" />
 <!--nav-->
-<script src="<?php echo get_js('jquery.min.js');?>"></script>
+<script src="<?php echo get_js_family('jquery.min.js');?>"></script>
 <script src="<?php echo get_js_family('jquery-ui.js');?>"></script>
 
 <script>
@@ -44,6 +44,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="body">
 <div class="wrap">
 <div class="wrapper">
+<?php
+$exam="";
+$users="";
+$settings="";
+$home="";
+if(!isset($active))$active="";
+if($active=="exam"){
+	$exam="active";
+}elseif($active=="users"){
+	$users="active";
+}elseif($active=="settings"){
+	$settings="active";
+}else{
+	$home="active";
+}
+?>
 	<!-- start header-->
 	<div class="header">
 		<div class="logo">
@@ -51,11 +67,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<div class="cssmenu">
 			<ul>
-			  	<li class="active"><a href="<?php echo get_site_url('');?>">Dashboard</a></li>
-				<li><a href="<?php echo get_site_url('exam');?>">Exam</a></li>
-				<li ><a href="<?php echo get_site_url('users');?>">Users</a></li>
-				<li ><a href="<?php echo get_site_url('settings');?>">Settings</a></li>
-				<li ><a href="<?php echo get_site_url('logout');?>" style="color:red;">Logout</a></li>
+			  	<li class="<?php echo $home; ?>"><a href="<?php echo get_site_url('');?>">Dashboard</a></li>
+				<li class="<?php echo $exam; ?>"><a href="<?php echo get_site_url('exam');?>">Exam</a></li>
+				<li class="<?php echo $users; ?>"><a href="<?php echo get_site_url('users');?>">Users</a></li>
+				<li class="<?php echo $settings; ?>" ><a href="<?php echo get_site_url('settings');?>">Settings</a></li>
+				<li class="<?php echo ""; ?>" ><a href="<?php echo get_site_url('logout');?>" style="color:red;">Logout</a></li>
 				<div class="clear"></div>
 			 </ul>
 		</div>

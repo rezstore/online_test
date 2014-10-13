@@ -2,6 +2,4 @@
  <tr>
   <th> GRAFIK </th>
  </tr>
- <tr>
-
 </table>

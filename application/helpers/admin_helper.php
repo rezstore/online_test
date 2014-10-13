@@ -15,7 +15,7 @@ function get_jquery_css($filename=''){
 }
 
 function get_js($filename=''){
- return base_url('assets/oltest/js/'.$filename);
+ return base_url('assets/js/'.$filename);
 }
 
 function get_js_family($filename=''){
@@ -37,6 +37,10 @@ function get_site_url($pagename=''){
  return site_url('_administrator/'.$pagename);
 }
 
+function get_tinymce_files($filename){
+	return base_url('assets/tinymce/'.$filename);
+}
+
 #----------------------------------------------------------------------
 function input($name='',$value='',$class=''){
  return form_input($name,$value,'class="form_control" '.$class);
@@ -47,7 +51,7 @@ function dropdown($name='',$arr=array(),$value='',$class=''){
 }
 
 function textarea($name='',$value='',$class=''){
- return form_textarea($name,$value,'class="form_control" '.$class);
+ return form_textarea($name,$value,'class='.$class);
 }
 
 function upload($name='',$value='',$class=''){
@@ -55,7 +59,7 @@ function upload($name='',$value='',$class=''){
 }
 
 function submit($name='',$value='',$class=''){
- return form_submit($name,$value,'class="form_control" '.$class);
+ return form_submit($name,$value,$class);
 }
 
 function button($name='',$value='',$class=''){
