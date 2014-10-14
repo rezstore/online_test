@@ -21,8 +21,9 @@ h2{text-align:left;}
 	         $date=$r->date_time;
 	         $sess_id=$r->sess_ID;
 	          $arr=explode('-',$sess_id);
-	         	$subject=get_subject($arr[1]);
-	         	$class=get_class($arr[2]);
+	          echo $arr[0];
+	         	$subject=$this->m_oltest->get_subject($arr[1]);
+	         	$class=$this->m_oltest->get_class($arr[2]);
 	         $score=$r->score;
 	         	$style='';
 	         	if($score < 60){

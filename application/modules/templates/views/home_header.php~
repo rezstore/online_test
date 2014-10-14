@@ -56,7 +56,6 @@ if ($active == "contact"){
 }else{
  $home_active=" class='active'";
 }
-echo $active;
 ?>
 <div class="body">
 <div class="wrap">

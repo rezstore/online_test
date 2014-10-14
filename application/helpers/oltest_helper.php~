@@ -19,10 +19,6 @@ function get_js_family($filename=''){
  return base_url('assets/js/jquery-family/'.$filename);
 }
 
-function get_js_plugins($filename=''){
- return base_url('assets/js/plugins/'.$filename);
-}
-
 function get_image($filename=''){
  return base_url('assets/oltest/images/'.$filename);
 }

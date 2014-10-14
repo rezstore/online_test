@@ -18,18 +18,25 @@ $class=strtoupper($c->get_session('class'));
 	       </p> ";
 	      ?>
 	      <hr>
+	      <span id="loader"></span>
 	      </td>
 	      </tr><tr>
 	      <td style="text-align:right">
 	      <?php
 	       echo anchor(get_site_url(''),'<button type="button" class="btn btn-danger">Tolak</button>').nbs();
-	       echo anchor(get_site_url('start'),'<button type="button" class="btn btn-primary">Lanjut</button>');
+	       echo anchor(get_site_url('start'),'<button type="button" class="btn btn-primary" onclick="set_time();">Lanjut</button>');
 	      ?>
 	      </td>
        </tr>
       </table>
     </div>
- 
+ <script src="<?php echo get_js_family('jquery.min.js'); ?>"></script>
+ <script>
+ 	function set_time(){
+ 		$("#loader").load("<?php echo get_site_url('set_time'); ?>");
+ 		window.open("<?php echo get_site_url('set_time'); ?>", "", "width=400, height=100");
+ 	}
+ </script>
 </div>
 </div>
 <!-- -->

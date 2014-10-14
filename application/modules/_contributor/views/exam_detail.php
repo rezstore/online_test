@@ -52,7 +52,7 @@
   if (strlen($d > 20 )){$d=substr($d,0,20).'...';}
   if (strlen($e > 20 )){$e=substr($e,0,20).'...';}
   $correct=ucfirst($row->answer);
-  if($n%2== 0){$bg="background:#E4E4E4";}else{$bg="";}
+  if($n%2== 0){$bg="ba	ckground:#E4E4E4";}else{$bg="";}
  ?>
  <?php 	
 	 echo "<tr style=".$bg.">";

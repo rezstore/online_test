@@ -91,7 +91,7 @@ class _contributor extends CI_Controller {
 	function exam_detail($ID){
 		$this->load->helper('form');
 		$this->unset_sessions("NOT_ALL",array('mapel')); //unset mapel
-		$data['title']="Exam Detile";
+		$data['title']="Exam Detail";
 		$data['active']="exam";
 		$data['ctrl']=$this;
 		$data['datas']=$this->m_contributor->select_detail_exam($ID,$this->check_username());
@@ -123,12 +123,12 @@ class _contributor extends CI_Controller {
 		   $kelas=$this->input->post('kelas');
 		   $mapel="$map-$kelas";
 		 }
-		 $soal=str_replace("../",'',$this->input->post('soal'));
-		 $a=str_replace("../",'',$this->input->post('jawab_a'));
-		 $b=str_replace("../",'',$this->input->post('jawab_b'));
-		 $c=str_replace("../",'',$this->input->post('jawab_c'));
-		 $d=str_replace("../",'',$this->input->post('jawab_d'));
-		 $e=str_replace("../",'',$this->input->post('jawab_e'));
+		 $soal=$this->input->post('soal');
+		 $a=$this->input->post('jawab_a');
+		 $b=$this->input->post('jawab_b');
+		 $c=$this->input->post('jawab_c');
+		 $d=$this->input->post('jawab_d');
+		 $e=$this->input->post('jawab_e');
 		 $true=$this->input->post('answer');
 		 if ($soal !== "" and $mapel !== ""){
 		 	$this->m_contributor->insert_new($this->check_username(),$mapel,$soal);

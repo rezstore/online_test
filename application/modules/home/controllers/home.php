@@ -32,10 +32,10 @@ class Home extends CI_controller  {
 		return $user;
 	}
 # UNSET SESSION
-	function unset_sessions($all='',$val1='',$val2=''){
+	function unset_sessions($all='ALL',$val1='',$val2=''){
 		$this->load->library('session');
 		if($all == 'ALL'){
-			$arr=array('subject','class','no_page','sess_id');
+			$arr=array('subject','class','no_page','sess_id','time_start');//
 			foreach($arr as $r){
 				$this->session->unset_userdata($r);
 			}
@@ -155,6 +155,15 @@ class Home extends CI_controller  {
 		 }
 	}
 	
+	function set_time(){
+		$next_time = time() + (1 * 1 * 59 * 00);
+		                   // 7 days; 24 hours; 60 mins; 60 secs
+		$target=date('Y|m|d|g|i|s',$next_time);
+		$this->set_session('time_start',$target);
+		//echo $this->get_session('time_start');
+		echo "Ayo Cepat Jawab Pertanyaan nya <b>60 menit</b> Dari sekarang dan dapatkan hasil terbaikmu....";
+	}
+	
 	function browse_scores(){
 		$data['title']="Nilai";
 		$data['active']="home";
@@ -269,6 +278,8 @@ class Home extends CI_controller  {
 	 #INSERT TO USER SCORES 
 	 $this->m_oltest->insert_new_score($username,$sess_id,$score);
 	 $this->unset_sessions();
+	 
+	 //exit;
 	 redirect(get_site_url('browse_scores'));
 	}
 	
