@@ -156,12 +156,18 @@ class Home extends CI_controller  {
 	}
 	
 	function set_time(){
+		//date_default_timezone_set("Asia/jakarta");
 		$next_time = time() + (1 * 1 * 59 * 00);
 		                   // 7 days; 24 hours; 60 mins; 60 secs
-		$target=date('Y|m|d|g|i|s',$next_time);
+		$target=date('Y|m|d|H|i|s',$next_time);
 		$this->set_session('time_start',$target);
 		//echo $this->get_session('time_start');
 		echo "Ayo Cepat Jawab Pertanyaan nya <b>60 menit</b> Dari sekarang dan dapatkan hasil terbaikmu....";
+		echo "
+			<script>
+			 setTimeout(function (){window.close()},1000);
+			</script>
+		";
 	}
 	
 	function browse_scores(){

@@ -2,7 +2,13 @@
 td.text-left{text-indent:-30px;}
 </style>
 <?php
-$target=$c->get_session('time_start');
+echo date('Y|m|d|H|i|s').br();
+echo $target=$c->get_session('time_start');
+if($target==""){
+echo "<script>";
+echo "$('#loader').load('".get_site_url('set_time')."');";
+echo "</script>";
+}
 $ex=explode('|',$target);
 //echo var_dump($ex);
 $year=$ex[0];
@@ -14,12 +20,12 @@ $second=$ex[5];
 
 $config = array(
 	'targetDate' => array(	// Target countdown date
-		'year'				=> $year,
-		'month'				=> $month,
-		'day'				=> $day,
-		'hour'				=> $hour,
-		'minute'			=> $minute,
-		'second'			=> $second
+		'year'				=> "$year",
+		'month'				=> "$month",
+		'day'				=> "$day",
+		'hour'				=> "$hour",
+		'minute'			=> "$minute",
+		'second'			=> "$second"
 	)
 );
 
@@ -39,8 +45,8 @@ $config = array(
 	$date['secs'] = $diffSecs % 60;
 	$date['mins'] = floor($diffSecs/60)%60;
 	$date['hours'] = floor($diffSecs/60/60)%24;
-	//$date['days'] = floor($diffSecs/60/60/24)%7;
-	//$date['weeks']	= floor($diffSecs/60/60/24/7);
+	$date['days'] = floor($diffSecs/60/60/24)%7;
+	$date['weeks']	= floor($diffSecs/60/60/24/7);
 	
 	foreach ($date as $i => $d) {
 		$d1 = $d%10;
@@ -53,6 +59,7 @@ $config = array(
 	}
 
 ?>
+<span id="loader"></span>
 <script language="Javascript" type="text/javascript" src="<?php echo get_js_family('jquery.min.js');?>"></script>
 <script language="Javascript" type="text/javascript" src="<?php echo get_js_plugins('jquery.lwtCountdown-1.0.js');?>"></script>
 <script language="Javascript" type="text/javascript" src="<?php echo get_js_plugins('misc.js');?>"></script>
@@ -60,7 +67,7 @@ $config = array(
     <div class="banner">
 	      <table class="table">
 	        <tr>
-		      <td colspan=1>
+		      <td colspan=2>
 		       <div id="countdown_dashboard" style="text-align:right">
 				<div class="dash hours_dash">
 					<span class="dash_title">hours</span>
@@ -87,12 +94,12 @@ $config = array(
 				jQuery(document).ready(function() {
 					$('#countdown_dashboard').countDown({
 						targetDate: {
-							'day': 		<?php echo $config['targetDate']['day']?>,
-							'month': 	<?php echo $config['targetDate']['month']?>,
-							'year': 	<?php echo $config['targetDate']['year']?>,
-							'hour': 	<?php echo $config['targetDate']['hour']?>,
-							'min': 		<?php echo $config['targetDate']['minute']?>,
-							'sec': 		<?php echo $config['targetDate']['second']?>
+							'day': 		"<?php echo $config['targetDate']['day']?>",
+							'month': 	"<?php echo $config['targetDate']['month']?>",
+							'year': 	"<?php echo $config['targetDate']['year']?>",
+							'hour': 	"<?php echo $config['targetDate']['hour']?>",
+							'min': 		"<?php echo $config['targetDate']['minute']?>",
+							'sec': 		"<?php echo $config['targetDate']['second']?>"
 						}
 					});
 				});

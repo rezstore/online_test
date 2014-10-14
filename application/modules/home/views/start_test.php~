@@ -34,7 +34,7 @@ $class=strtoupper($c->get_session('class'));
  <script>
  	function set_time(){
  		$("#loader").load("<?php echo get_site_url('set_time'); ?>");
- 		window.open("<?php echo get_site_url('set_time'); ?>", "", "width=200, height=100");
+ 		//window.open("<?php echo get_site_url('set_time'); ?>", "", "width=400, height=100");
  	}
  </script>
 </div>

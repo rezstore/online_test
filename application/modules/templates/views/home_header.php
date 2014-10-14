@@ -71,7 +71,7 @@ if ($active == "contact"){
 				<li<?php echo $blog_active; ?>><a href="<?php echo get_site_url('blog');?>">Blog</a></li>
 				<li<?php echo $about_active; ?> ><a href="<?php echo get_site_url('about');?>">About</a></li>
 				<li<?php echo $contact_active; ?> ><a href="<?php echo get_site_url('contact');?>">Contact</a></li>
-				<li><a href="<?php echo get_site_url('logout');?>" style="color:red;">Logout</a></li>
+				<li><a href="<?php echo get_site_url('logout');?>" style="color:red;">out</a></li>
 				<div class="clear"></div>
 			 </ul>
 		</div>
