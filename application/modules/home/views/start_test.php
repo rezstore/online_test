@@ -24,7 +24,7 @@ $class=strtoupper($c->get_session('class'));
 	      <td style="text-align:right">
 	      <?php
 	       echo anchor(get_site_url(''),'<button type="button" class="btn btn-danger">Tolak</button>').nbs();
-	       echo anchor(get_site_url('start'),'<button type="button" class="btn btn-primary" onclick="set_time();">Lanjut</button>');
+	       echo '<button type="button" class="btn btn-primary" onclick="set_time();">Lanjut</button>';
 	      ?>
 	      </td>
        </tr>
@@ -35,6 +35,8 @@ $class=strtoupper($c->get_session('class'));
  	function set_time(){
  		$("#loader").load("<?php echo get_site_url('set_time'); ?>");
  		window.open("<?php echo get_site_url('set_time'); ?>", "", "width=400, height=100");
+ 		var url="<?php echo get_site_url('start');?>";
+ 		setTimeout(function(){window.location=url;},5000);
  	}
  </script>
 </div>

@@ -88,13 +88,13 @@ class _contributor extends CI_Controller {
 		$this->footer($data);
 	}
 	
-	function exam_detail($ID){
+	function exam_detail($ID,$mapel='',$class=''){
 		$this->load->helper('form');
 		$this->unset_sessions("NOT_ALL",array('mapel')); //unset mapel
 		$data['title']="Exam Detail";
 		$data['active']="exam";
 		$data['ctrl']=$this;
-		$data['datas']=$this->m_contributor->select_detail_exam($ID,$this->check_username());
+		$data['datas']=$this->m_contributor->select_detail_exam($ID,$this->check_username(),$mapel,$class);
 		$this->header($data);
 		$this->load_view("exam_detail",$data);
 		$this->footer($data);
@@ -164,6 +164,18 @@ class _contributor extends CI_Controller {
 		$this->header($data);
 		$this->load->view("new_edit_exam",$data);
 		$this->footer($data);
+	}
+	
+	function delete_exam($id=''){
+		if($id !== ""){
+		  $res=$this->m_contributor->delete_exam($id);
+		}
+		if ($res!= ""){
+		  $r=explode('-',$res);
+		  $mapel=$r[0];
+		  $class=$r[1];
+			redirect(get_site_url("exam_detail/$mapel/$class"));
+		}
 	}
 	
 }

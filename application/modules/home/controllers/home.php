@@ -157,7 +157,7 @@ class Home extends CI_controller  {
 	
 	function set_time(){
 		//date_default_timezone_set("Asia/jakarta");
-		$next_time = time() + (1 * 1 * 59 * 00);
+		$next_time = time() + (1 * 1 * 61 * 00);
 		                   // 7 days; 24 hours; 60 mins; 60 secs
 		$target=date('Y|m|d|H|i|s',$next_time);
 		$this->set_session('time_start',$target);

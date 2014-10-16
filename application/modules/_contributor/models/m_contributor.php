@@ -36,13 +36,21 @@ class M_contributor extends CI_Model
 
    }
    
-   function select_detail_exam($id,$username){
+   function select_detail_exam($id,$username,$mapel='',$class=''){
    	$username=$this->escape($username);
 	$id=$this->escape($id);
-	$sql="SELECT * FROM exam_questions WHERE exam_ID = $id  LIMIT 1";
-	foreach($this->db->query($sql)->result() as $r){
-		$mapel=$this->escape($r->subject_code);
-		$class=$this->escape($r->class_code);
+	if($mapel == "" or $class == ""){
+		$mapel='';$class=''; //unset values
+		$sql="SELECT * FROM exam_questions WHERE exam_ID = $id  LIMIT 1";
+		foreach($this->db->query($sql)->result() as $r){
+			$mapel=$r->subject_code;
+			$class=$r->class_code;
+		}
+	}else{
+		
+	}
+		$mapel=$this->escape($mapel);
+		$class=$this->escape($class);
 		$sql="SELECT exam_questions.exam_ID ,
 					exam_questions.subject_code ,
 					exam_questions.class_code ,
@@ -64,7 +72,6 @@ class M_contributor extends CI_Model
 		 		and adm_users.username = $username";
 		return $this->db->query($sql);
 		exit;
-	}
    }
    
    function select_class(){
@@ -132,8 +139,14 @@ class M_contributor extends CI_Model
 	}
    }
    
-   function delete_exam($id){
+   function delete_exam($id,$username){
 	$id=$this->escape($id);
+	$mapel='';$class='';
+	$sql="SELECT * FROM exam_questions WHERE exam_ID = $id  LIMIT 1";
+	foreach($this->db->query($sql)->result() as $r){
+		$mapel=$r->subject_code;
+		$class=$r->class_code;
+	}
 	$sql="DELETE FROM exam_questions WHERE exam_ID=$id ";
 	$sql_delete_answer_opt="DELETE FROM choice_answers WHERE exam_ID=$id";
 	$sql_answer="DELETE FROM correct_answer WHERE exam_ID=$id";
@@ -142,6 +155,7 @@ class M_contributor extends CI_Model
 			$this->db->query($sql_answer);
 		}
 	}
+	return $mapel.'-'.$class;
    }
    
    function select_ID_question($user_ID,$mapel,$soal){

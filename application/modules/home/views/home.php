@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-     <title>Online Tes</title>
+     <title>IndoTes.com - Ujian Online Indonesia</title>
 	<link href="<?php echo get_css('style.css');?>" rel="stylesheet" type="text/css" media="all" />
 	<link href="<?php echo get_css('custom.css');?>" rel='stylesheet' type='text/css'>
 	<style>
@@ -9,6 +9,8 @@
 	 p.heading a{color:#F3F3F3;}
 	 p.heading a:hover{text-decoration:underline;}
 	</style>
+	<meta content="Belajar lebih menyenangkan bersama indotes.com .Latihan ujian nasional,ujian sekolah dan tes lainnya secara ONLINE!" name="DISCRIPTION"/>
+	<meta content="ujian nasional online, tes online, Balajar soal ujian online" name="KEYWORDS"/>
 	</head>
 	<body>
 	<div class="content">

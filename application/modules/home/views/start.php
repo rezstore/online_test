@@ -2,8 +2,8 @@
 td.text-left{text-indent:-30px;}
 </style>
 <?php
-echo date('Y|m|d|H|i|s').br();
-echo $target=$c->get_session('time_start');
+//echo date('Y|m|d|H|i|s').br();
+$target=$c->get_session('time_start');
 if($target==""){
 echo "<script>";
 echo "$('#loader').load('".get_site_url('set_time')."');";
