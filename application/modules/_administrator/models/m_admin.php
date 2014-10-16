@@ -133,7 +133,7 @@ class M_admin extends CI_Model
    
    function delete_exam($id){
 	$id=$this->escape($id);
-	echo $sql="DELETE FROM exam_questions WHERE exam_ID=$id ";
+	$sql="DELETE FROM exam_questions WHERE exam_ID=$id ";
 	$sql_delete_answer_opt="DELETE FROM choice_answers WHERE exam_ID=$id";
 	$sql_answer="DELETE FROM correct_answer WHERE exam_ID=$id";
 	if($this->db->query($sql)){
@@ -143,7 +143,7 @@ class M_admin extends CI_Model
 	}
    }
    
-   function insert_new($username,$mapel,$soal){
+   function insert_new_question($username,$mapel,$soal){
     $s=explode('-',$mapel);
     //echo var_dump($s);
     $soal=$this->escape($soal);
@@ -155,10 +155,17 @@ class M_admin extends CI_Model
     		VALUES ($user,$subject,$class,$soal)";
     $this->db->query($sql);
 	# SELECT GET ID_EXAM
-	$sql="SELECT "
+	$sql="SELECT exam_ID FROM exam_questions 
+				WHERE user_ID=$user AND subject_code=$subject AND class_code=$class 
+				AND exam_content=$soal ORDER BY exam_ID DESC LIMIT 1 ";
+    $q=$this->db->query($sql);
+	foreach($q->result() as $r){
+		return $r->exam_ID;
+	}
+	
    }
    
-   function insert_answer_options($exam_id, $a, $b, $c, $d, $e, $true){
+   function insert_new_options_and_answer($exam_id, $a, $b, $c, $d, $e, $true){
 	$id=$this->escape($exam_id);
 	$a=$this->escape($a);
 	$b=$this->escape($b);
@@ -168,6 +175,8 @@ class M_admin extends CI_Model
 	$true=$this->escape($true);
 	$sql="INSERT INTO `choice_answers` (`exam_ID`, `a`, `b`, `c`, `d`, `e`) 
 		VALUES ($id, $a, $b, $c, $d, $e)";
+	$this->db->query($sql);
+	$sql="INSERT INTO correct_answer (`exam_ID`,`answer`) VALUES ($id,$true)";
 	$this->db->query($sql);
    }
    

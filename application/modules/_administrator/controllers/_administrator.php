@@ -143,6 +143,7 @@ class _administrator extends CI_Controller {
 	function delete_exam($id=""){
 		if($id == "")echo "Maaf Data yang anda ingin hapus tidak ada !!!";
 		else $this->m_admin->delete_exam($id);
+		redirect(get_site_url("exam"));
 	}
 	
 	function new_exam(){
@@ -167,10 +168,11 @@ class _administrator extends CI_Controller {
 		 $d=str_replace("../",'',$this->input->post('jawab_d'));
 		 $e=str_replace("../",'',$this->input->post('jawab_e'));
 		 $true=$this->input->post('jawab_true');
-		 if ($soal !== "" and $mapel !== ""){
-		 	$this->m_admin->insert_new_question($this->check_username(),$mapel,$soal, $a, $b, $c, $d, $e, $true);
-			$this->m_admin->insert_new_options($ID $a, $b, $c, $d, $e);
-		 	//$this->unset_sessions("NOT_ALL",array('mapel'));
+		 if ($soal !== "" and $mapel !== "" and $true !== ""){
+		 	$id=$this->m_admin->insert_new_question($this->check_username(),$mapel,$soal); //menyimpan dan membaca nilai ID soal
+			$this->m_admin->insert_new_options_and_answer($id ,$a, $b, $c, $d, $e,$true);
+		 	$this->unset_sessions("NOT_ALL",array('mapel'));
+			redirect(get_site_url("exam"));
 		 }
 		}
 	}
