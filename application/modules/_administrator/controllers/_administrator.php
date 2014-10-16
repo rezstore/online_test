@@ -161,15 +161,16 @@ class _administrator extends CI_Controller {
 	function insert_todb(){
 		if($_POST){
 		 $mapel=$this->get_session('mapel');
+		 if($mapel == "")exit;
 		 $soal=str_replace("../",'',$this->input->post('soal'));
 		 $a=str_replace("../",'',$this->input->post('jawab_a'));
 		 $b=str_replace("../",'',$this->input->post('jawab_b'));
 		 $c=str_replace("../",'',$this->input->post('jawab_c'));
 		 $d=str_replace("../",'',$this->input->post('jawab_d'));
 		 $e=str_replace("../",'',$this->input->post('jawab_e'));
-		 $true=$this->input->post('jawab_true');
+		 $true=$this->input->post('answer');
 		 if ($soal !== "" and $mapel !== "" and $true !== ""){
-		 	$id=$this->m_admin->insert_new_question($this->check_username(),$mapel,$soal); //menyimpan dan membaca nilai ID soal
+		 	echo "asd".$id=$this->m_admin->insert_new_question($this->check_username(),$mapel,$soal); //menyimpan dan membaca nilai ID soal
 			$this->m_admin->insert_new_options_and_answer($id ,$a, $b, $c, $d, $e,$true);
 		 	$this->unset_sessions("NOT_ALL",array('mapel'));
 			redirect(get_site_url("exam"));

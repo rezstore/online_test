@@ -145,19 +145,20 @@ class M_admin extends CI_Model
    
    function insert_new_question($username,$mapel,$soal){
     $s=explode('-',$mapel);
-    //echo var_dump($s);
+    echo var_dump($s);
     $soal=$this->escape($soal);
     $subject=$this->escape($s[0]);
     $class=$this->escape($s[1]);
+	if ($subject == "" or $class == "")exit;
     $user=$this->select_user_ID($username);
     
     $sql="INSERT INTO exam_questions (`user_ID`,`subject_code`,`class_code`,`exam_content`) 
     		VALUES ($user,$subject,$class,$soal)";
     $this->db->query($sql);
 	# SELECT GET ID_EXAM
-	$sql="SELECT exam_ID FROM exam_questions 
-				WHERE user_ID=$user AND subject_code=$subject AND class_code=$class 
-				AND exam_content=$soal ORDER BY exam_ID DESC LIMIT 1 ";
+	echo $sql="SELECT exam_ID FROM exam_questions 
+				WHERE user_ID=$user AND subject_code=$subject 
+				ORDER BY exam_ID DESC LIMIT 1 ";
     $q=$this->db->query($sql);
 	foreach($q->result() as $r){
 		return $r->exam_ID;
@@ -176,7 +177,7 @@ class M_admin extends CI_Model
 	$sql="INSERT INTO `choice_answers` (`exam_ID`, `a`, `b`, `c`, `d`, `e`) 
 		VALUES ($id, $a, $b, $c, $d, $e)";
 	$this->db->query($sql);
-	$sql="INSERT INTO correct_answer (`exam_ID`,`answer`) VALUES ($id,$true)";
+	echo $sql="INSERT INTO correct_answer (`exam_ID`,`answer`) VALUES ($id,$true)";
 	$this->db->query($sql);
    }
    
