@@ -13,8 +13,8 @@
   foreach($datas->result() as $row){
 	  $subject=$row->subject_code;
 	  $class=$row->class_code;
-  }
   $ctrl->set_session('mapel',"$subject-$class");
+  }
   ?>
 
 <table class="table table-hover">

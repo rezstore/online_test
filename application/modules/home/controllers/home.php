@@ -210,7 +210,7 @@ class Home extends CI_controller  {
 		  	$this->set_session('no_page',0);
 		  }
 		  
-		  if($total < $page_active){
+		  if($total <= $page_active){
 		   redirect(get_site_url('calculate_correct_answers'));
 		   exit;
 		  }

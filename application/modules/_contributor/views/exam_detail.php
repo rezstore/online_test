@@ -45,12 +45,12 @@
   $c=$row->c;
   $d=$row->d;
   $e=$row->e;
-  if (strlen($content > 20 )){$content=substr($content,0,20).'...';}
-  if (strlen($a > 20 )){$a=substr($a,0,20).'...';}
-  if (strlen($b > 20 )){$b=substr($b,0,20).'...';}
-  if (strlen($c > 20 )){$c=substr($c,0,20).'...';}
-  if (strlen($d > 20 )){$d=substr($d,0,20).'...';}
-  if (strlen($e > 20 )){$e=substr($e,0,20).'...';}
+  if (strlen($content) > 20 ){$content=substr($content,0,20).'...';}
+  if (strlen($a) > 20 ){$a=substr($a,0,20).'...';}
+  if (strlen($b) > 20 ){$b=substr($b,0,20).'...';}
+  if (strlen($c) > 20 ){$c=substr($c,0,20).'...';}
+  if (strlen($d) > 20 ){$d=substr($d,0,20).'...';}
+  if (strlen($e) > 20 ){$e=substr($e,0,20).'...';}
   $correct=ucfirst($row->answer);
   if($n%2== 0){$bg="ba	ckground:#E4E4E4";}else{$bg="";}
  ?>

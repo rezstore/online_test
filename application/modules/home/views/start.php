@@ -111,6 +111,7 @@ $config = array(
 		</tr>
 	      <?php
 	      echo form_open(get_site_url('check_answers'));
+	      $no_page;
 	      $exam=$this->m_oltest->get_questions($subject,$class,$no_page);
 	       if (!isset($exam))exit;
 	       $no= $no_page+1;$n=1;

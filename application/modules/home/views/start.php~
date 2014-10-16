@@ -2,8 +2,8 @@
 td.text-left{text-indent:-30px;}
 </style>
 <?php
-echo date('Y|m|d|H|i|s').br();
-echo $target=$c->get_session('time_start');
+//echo date('Y|m|d|H|i|s').br();
+$target=$c->get_session('time_start');
 if($target==""){
 echo "<script>";
 echo "$('#loader').load('".get_site_url('set_time')."');";
@@ -111,6 +111,7 @@ $config = array(
 		</tr>
 	      <?php
 	      echo form_open(get_site_url('check_answers'));
+	      echo $no_page;
 	      $exam=$this->m_oltest->get_questions($subject,$class,$no_page);
 	       if (!isset($exam))exit;
 	       $no= $no_page+1;$n=1;
