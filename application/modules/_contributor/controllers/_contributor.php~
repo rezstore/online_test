@@ -155,6 +155,7 @@ class _contributor extends CI_Controller {
 			$answer=$this->post("answer");
 			if ($question == "" or $a=="" or $b=="" or $c=="" or $d=="" or $e=="" or $answer=="")$err="Harap si isi dengan benar !!!";
 			if(!isset($err))$this->m_contributor->update_exam_question($user_ID,$id,$question,$a,$b,$c,$d,$e,$answer);
+		  		$this->insert_activities("EDIT exam WHERE ID=$id");
 			if(!isset($err)) redirect(get_site_url("exam_detail/$id"));
 			
 			exit;
@@ -177,6 +178,7 @@ class _contributor extends CI_Controller {
 		  $r=explode('-',$res);
 		  $mapel=$r[0];
 		  $class=$r[1];
+		  	$this->insert_activities("DELETE exam WHERE ID=$id");
 			redirect(get_site_url("exam_detail/$mapel/$class"));
 		}
 	}
@@ -208,12 +210,18 @@ class _contributor extends CI_Controller {
 	 	$user_ID=$this->m_contributor->select_user_ID($this->check_username());
 	 	$date=$this->m_contributor->select_date_from_activities($id);
 	 	if($date == "")exit;
-	 	$data['q']=$this->m_contributor->select_activities_where($date,$user_ID);
+	 	$data['activities']=$this->m_contributor->select_activities_where($date,$user_ID);
 	 	$data["title"]="Detail Activities";
 		$data['active']="home";
 		$this->header($data);
 		$this->load->view("detail_activities",$data);
 		$this->footer($data);
+	 }
+	 
+	 function insert_activities($activity){
+	 	if ($activity=="")exit;
+	 	$userid=$this->m_contributor->select_user_ID($this->check_username());
+	 	$this->m_contributor->insert_activity($userid,$activity);
 	 }
 	
 }

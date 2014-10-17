@@ -13,7 +13,7 @@
  <tr>
   <th> NO </th>
   <th> TANGGAL </th>
-  <th colspan=2> AKTIVITAS </th>
+  <th> AKTIVITAS </th>
  </tr>
  <?php 
   if (isset($activities)){
@@ -29,7 +29,6 @@
 	 ."<td>".$no."</td>"
 	 ."<td>".$date."</td>"
 	 ."<td>".$activity."</td>"
-	 ."<td>".$button_lihat.$button_edit."</td>"
 	."</tr>";
 	$no++;
     }	

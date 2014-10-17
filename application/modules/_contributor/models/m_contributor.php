@@ -6,6 +6,13 @@ class M_contributor extends CI_Model
 	return $this->db->escape($str);
   }
   
+  function insert_activity($userid,$activity){
+  	$user_id=$this->escape($userid);
+  	$activity=$this->escape($activity);
+  	$sql="INSERT INTO adm_activities (`date`,`user_ID`,`activity`) VALUES (NOW(),$user_id,$activities) ";
+  	$this->db->query($sql);
+  }
+  
   function select_user_ID($username){
   	$username=$this->escape($username);
   	$sql="SELECT ID FROM adm_users WHERE username=$username LIMIT 1";
