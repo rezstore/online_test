@@ -49,8 +49,8 @@ class M_contributor extends CI_Model
 	}else{
 		
 	}
-		$mapel=$this->escape($r->subject_code);
-		$class=$this->escape($r->class_code);
+		$mapel=$this->escape($mapel);
+		$class=$this->escape($class);
 		$sql="SELECT exam_questions.exam_ID ,
 					exam_questions.subject_code ,
 					exam_questions.class_code ,
@@ -169,6 +169,20 @@ class M_contributor extends CI_Model
    	foreach($q->result() as $r){
    		return $r->exam_ID;
    	}
+   }
+   
+   function select_activity_where($userid){
+   	$userid=$this->escape($userid);
+   	$sql="SELECT *,MONTH(date) as bulan,COUNT(ID) as total FROM adm_activities WHERE user_ID=$userid GROUP BY bulan ORDER BY bulan DESC";
+   	$q=$this->db->query($sql);
+   	return $q;
+   }
+   
+   function get_data_activities_for_chart($userid){
+   	$userid=$this->escape($userid);
+   	echo $sql="SELECT *,COUNT(ID) as total FROM adm_activities WHERE user_ID=$userid GROUP BY date ORDER BY date ASC";
+   	$q=$this->db->query($sql);
+   	return $q;
    }
    
 

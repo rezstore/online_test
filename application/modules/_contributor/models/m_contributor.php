@@ -171,6 +171,20 @@ class M_contributor extends CI_Model
    	}
    }
    
+   function select_activity_where($userid){
+   	$userid=$this->escape($userid);
+   	$sql="SELECT *,MONTH(date) as bulan,COUNT(ID) as total FROM adm_activities WHERE user_ID=$userid GROUP BY bulan ORDER BY bulan DESC";
+   	$q=$this->db->query($sql);
+   	return $q;
+   }
+   
+   function get_data_activities_for_chart($userid){
+   	$userid=$this->escape($userid);
+   	$sql="SELECT *,COUNT(ID) as total FROM adm_activities WHERE user_ID=$userid GROUP BY date ORDER BY date ASC";
+   	$q=$this->db->query($sql);
+   	return $q;
+   }
+   
 
 
 }

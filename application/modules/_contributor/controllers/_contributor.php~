@@ -69,8 +69,10 @@ class _contributor extends CI_Controller {
 	}
 	
 	function home(){
+		$user_ID=$this->m_contributor->select_user_ID($this->check_username());
 		$data['title']="Home";
 		$data['active']="home";
+		$data['activities']=$this->m_contributor->select_activity_where($user_ID);
 		$this->header($data);
 		$this->load_view("home",$data);
 		$this->footer($data);
@@ -168,11 +170,37 @@ class _contributor extends CI_Controller {
 	
 	function delete_exam($id=''){
 		if($id !== ""){
-		  $this->m_contributor->delete_exam($id);
+		  $res=$this->m_contributor->delete_exam($id);
 		}
-		$data['datas']=$this->m_contributor->select_detail_exam($ID,$this->check_username());
-		redirect(get_site_url(""));
+		if ($res!= ""){
+		  $r=explode('-',$res);
+		  $mapel=$r[0];
+		  $class=$r[1];
+			redirect(get_site_url("exam_detail/$mapel/$class"));
+		}
 	}
+	
+	function get_graphic_activities($id){
+	 	$row=array();
+	 	$user_ID=$this->m_contributor->select_user_ID($this->check_username());
+			$s=$this->m_contributor->get_data_activities_for_chart($user_ID);
+			$n=1;
+			foreach($s->result() as $r){
+			 $p=$r->total;
+			 	if ($n==1){
+				 	$coll[]=array("id"=>"","label"=>"Topping","type"=>"string","pattern"=>"");
+				 	$coll[]=array("id"=>"","label"=>$r->activity,"type"=>"number","pattern"=>"");
+			 	}
+				$v1=array("v"=>$r->date);
+				$v2=array("v"=>$p);
+			 	$row=array($v1,$v2);
+				$rs[]=array("c"=>$row);
+				$row="";
+				$n++;
+			 }
+	 	$b=array("cols"=>$coll,"rows"=>$rs);
+		echo json_encode($b);
+	 }
 	
 }
 //end of file
