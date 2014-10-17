@@ -185,6 +185,23 @@ class M_contributor extends CI_Model
    	return $q;
    }
    
+   function select_date_from_activities($id){
+   	$id=$this->escape($id);
+   	$sql="SELECT date FROM adm_activities WHERE ID=$id";
+   	$q=$this->db->query($sql);
+   	foreach($q->result() as $r){
+   		return $r->date;
+   	}
+   }
+   
+   function select_activities_where($date,$userid){
+   	$date=$this->escape($date);
+   	$userid=$this->escape($userid);
+   	$sql="SELECT * FROM adm_activities WHERE date=$date AND user_ID=$userid";
+   	$q=$this->db->query($sql);
+   	return $q;
+   }
+   
 
 
 }

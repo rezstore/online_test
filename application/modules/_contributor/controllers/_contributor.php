@@ -190,7 +190,7 @@ class _contributor extends CI_Controller {
 			 $p=$r->total;
 			 	if ($n==1){
 				 	$coll[]=array("id"=>"","label"=>"Topping","type"=>"string","pattern"=>"");
-				 	$coll[]=array("id"=>"","label"=>$r->activity,"type"=>"number","pattern"=>"");
+				 	$coll[]=array("id"=>"","label"=>"Aktivitas","type"=>"number","pattern"=>"");
 			 	}
 				$v1=array("v"=>$r->date);
 				$v2=array("v"=>$p);
@@ -201,6 +201,19 @@ class _contributor extends CI_Controller {
 			 }
 	 	$b=array("cols"=>$coll,"rows"=>$rs);
 		echo json_encode($b);
+	 }
+	 
+	 function show_detail($id){
+	 	if($id == "")exit;
+	 	$user_ID=$this->m_contributor->select_user_ID($this->check_username());
+	 	$date=$this->m_contributor->select_date_from_activities($id);
+	 	if($date == "")exit;
+	 	$data['activities']=$this->m_contributor->select_activities_where($date,$user_ID);
+	 	$data["title"]="Detail Activities";
+		$data['active']="home";
+		$this->header($data);
+		$this->load->view("detail_activities",$data);
+		$this->footer($data);
 	 }
 	
 }

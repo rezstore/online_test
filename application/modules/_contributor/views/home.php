@@ -49,7 +49,8 @@
  <tr>
   <th> NO </th>
   <th> TANGGAL </th>
-  <th colspan=2> AKTIVITAS </th>
+  <th> AKTIVITAS </th>
+  <th> Total </th>
  </tr>
  <?php 
   if (isset($activities)){
@@ -58,12 +59,14 @@
      $id=$row->ID;
      $date=$row->date;
      $activity=$row->activity;
+     $total=$row->total;
      $button_lihat=anchor(get_site_url("show_detail/$id"),"Lihat",'class="btn btn-primary"').' ';
      $button_edit="";//anchor(get_site_url(""),"Edit",'class="btn"');
 	echo "<tr>"
 	 ."<td>".$no."</td>"
 	 ."<td>".$date."</td>"
 	 ."<td>".$activity."</td>"
+	 ."<td>".$total."</td>"
 	 ."<td>".$button_lihat.$button_edit."</td>"
 	."</tr>";
 	$no++;
