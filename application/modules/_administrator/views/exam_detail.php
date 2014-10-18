@@ -13,8 +13,8 @@
   foreach($datas->result() as $row){
 	  $subject=$row->subject_code;
 	  $class=$row->class_code;
-  }
   $ctrl->set_session('mapel',"$subject-$class");
+  }
   ?>
 
 <table class="table table-hover">
@@ -34,7 +34,8 @@
   <td colspan="8"></td>
  </tr>
  <?php
-  $n=1;
+  $n=$page;
+ if($n == 0)$n=1; else $n += 1;
   foreach($datas->result() as $row){
   $ID=$row->exam_ID;
   $subject=$row->subject_code;
@@ -45,18 +46,24 @@
   $c=$row->c;
   $d=$row->d;
   $e=$row->e;
+  if (strlen($content) > 20 ){$content=substr($content,0,20).'...';}
+  if (strlen($a) > 20 ){$a=substr($a,0,20).'...';}
+  if (strlen($b) > 20 ){$b=substr($b,0,20).'...';}
+  if (strlen($c) > 20 ){$c=substr($c,0,20).'...';}
+  if (strlen($d) > 20 ){$d=substr($d,0,20).'...';}
+  if (strlen($e) > 20 ){$e=substr($e,0,20).'...';}
   $correct=ucfirst($row->answer);
-  if($n%2== 0){$bg="background:#E4E4E4";}else{$bg="";}
+  if($n%2== 0){$bg="ba	ckground:#E4E4E4";}else{$bg="";}
  ?>
  <?php 	
 	 echo "<tr style=".$bg.">";
  	  echo "<td class='tip' title='Soal No. $n'> $n</td>";
-	  echo "<td class='tip' title='$content'>".substr($content,0,20)."...</td>";
-	  echo "<td class='tip' title='$a'>".substr($a,0,20)."...</td>";
-	  echo "<td class='tip' title='$b'>".substr($b,0,20)."...</td>";
-	  echo "<td class='tip' title='$c'>".substr($c,0,20)."...</td>";
-	  echo "<td class='tip' title='$d'>".substr($d,0,20)."...</td>";
-	  echo "<td class='tip' title='$e'>".substr($e,0,20)."...</td>";
+	  echo "<td class='tip' title='$content'>".$content."</td>";
+	  echo "<td class='tip' title='$a'>".$a."</td>";
+	  echo "<td class='tip' title='$b'>".$b."</td>";
+	  echo "<td class='tip' title='$c'>".$c."</td>";
+	  echo "<td class='tip' title='$d'>".$d."</td>";
+	  echo "<td class='tip' title='$e'>".$e."</td>";
 	  echo "<td>$correct</td>";
  ?>
 	  <td>
@@ -69,7 +76,26 @@
  }
  ?>
  <tr>
-	  <td colsan=7></td>
+	  <td colspan=5 class="pagination" style="text-align:right;">
+	  	<ul class="pagination">
+		  <li><a href="?p=">&laquo;</a></li>
+		  <?php
+		 $tot=$record_total/10;
+		 $y=$record_total%10;
+		 if($y > 0){$actv=($n%10);}else{$actv=1;}
+		  $class="";
+		  for($a=1;$a<=$tot;$a++){
+		  	if($a == $active_page)$class="active";
+		  	echo "<li class=".$class.">".anchor($this->uri->uri_string()."?p=$a","$a")."</li>";
+		  	$class="";
+		  }
+		  if($y > 0){
+			if($active_page == $a)$class="active";
+		  	echo "<li class=$class>".anchor($this->uri->uri_string()."?p=".$a,$a)."</li>";}
+		  ?>
+		  <li><a href="#">&raquo;</a></li>
+		</ul>
+	  </td>
  </tr>
 
 </table>
