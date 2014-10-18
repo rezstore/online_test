@@ -50,6 +50,10 @@ class _contributor extends CI_Controller {
 	function post($str){
 		return $this->input->post($str);
 	}
+	
+	function get($str){
+		return $this->input->get($str);
+	}
 # LOADING MAIN VIEWS
 
 	function header($data){
@@ -93,14 +97,38 @@ class _contributor extends CI_Controller {
 	
 	function exam_detail($ID,$mapel='',$class=''){
 		$this->load->helper('form');
-		$this->unset_sessions("NOT_ALL",array('mapel')); //unset mapel
+		//initial mapel
+		$mpl=$this->get_session('mapel');
+		if($mpl == ""){$mapel="";$class="";}else{
+			$m=explode('-',$mpl);
+			$mapel=$m[0];
+			$class=$m[1];
+		}
+		$userid=$this->m_contributor->select_user_ID($this->check_username());
 		$data['title']="Exam Detail";
 		$data['active']="exam";
+		$page=$this->get("p");
+		if(!is_numeric($page))$page=0;
+		if($page == ""){$page=0;}else{$page = ($page*10)-10;}
+		$data['page']=$page;
+		$data['active_page']=($page/10)+10 - 10 +1;
 		$data['ctrl']=$this;
-		$data['datas']=$this->m_contributor->select_detail_exam($ID,$this->check_username(),$mapel,$class);
+		$data['datas']=$this->m_contributor->select_detail_exam($ID,$this->check_username(),$mapel,$class,$page);
+		$data['record_total']=$this->record_total("exam_questions",$userid,$mapel,$class);
 		$this->header($data);
 		$this->load_view("exam_detail",$data);
 		$this->footer($data);
+	}
+	
+	function record_total($table,$userid='',$mapel='',$class=''){
+		$rec_total=$this->get_session('rec_total');
+		if ($rec_total == ""){
+			//with parameter table name
+			$rec_total=$this->m_contributor->get_total_rec($table,$userid,$mapel,$class);
+			$this->get_session('rec_total',$rec_total);
+			$this->unset_sessions("NOT_ALL",array('mapel')); //unset mapel
+		}
+		return $rec_total;
 	}
 	
 	function new_exam(){
@@ -137,6 +165,7 @@ class _contributor extends CI_Controller {
 		 	$this->m_contributor->insert_new($this->check_username(),$mapel,$soal);
 		 	$exam_id=$this->m_contributor->select_ID_question($user_ID,$mapel,$soal);
 		 	$this->m_contributor->insert_answer_options($exam_id, $a, $b, $c, $d, $e, $true);
+		  	$this->insert_activities("INSERT exam WHERE ID=$exam_id");
 		 	redirect(get_site_url("exam"));
 		 }
 		}

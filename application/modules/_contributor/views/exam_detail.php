@@ -34,7 +34,8 @@
   <td colspan="8"></td>
  </tr>
  <?php
-  $n=1;
+  $n=$page;
+ if($n == 0)$n=1; else $n += 1;
   foreach($datas->result() as $row){
   $ID=$row->exam_ID;
   $subject=$row->subject_code;
@@ -75,7 +76,26 @@
  }
  ?>
  <tr>
-	  <td colsan=7></td>
+	  <td colspan=5 class="pagination" style="text-align:right;">
+	  	<ul class="pagination">
+		  <li><a href="?p=">&laquo;</a></li>
+		  <?php
+		 $tot=$record_total/10;
+		 $y=$record_total%10;
+		 if($y > 0){$actv=($n%10);}else{$actv=1;}
+		  $class="";
+		  for($a=1;$a<=$tot;$a++){
+		  	if($a == $active_page)$class="active";
+		  	echo "<li class=".$class.">".anchor($this->uri->uri_string()."?p=$a","$a")."</li>";
+		  	$class="";
+		  }
+		  if($y > 0){
+			if($active_page == $a)$class="active";
+		  	echo "<li class=$class>".anchor($this->uri->uri_string()."?p=".$a,$a)."</li>";}
+		  ?>
+		  <li><a href="#">&raquo;</a></li>
+		</ul>
+	  </td>
  </tr>
 
 </table>

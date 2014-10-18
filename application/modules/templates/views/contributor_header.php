@@ -13,8 +13,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- google fonts -->
 <!-- end google fonts -->
 <link href="<?php echo get_css('style2.css');?>" rel="stylesheet" type="text/css" media="all" />
-<link href="<?php echo get_css('bootstrap.css');?>" rel="stylesheet" type="text/css" media="all" />
 <link href="<?php echo get_common('css/admin.css');?>" rel="stylesheet" type="text/css" media="all" />
+<link href="<?php echo get_css('bootstrap.css');?>" rel="stylesheet" type="text/css" media="all" />
 <link href="<?php echo get_css_jquery('jquery-ui.css');?>" rel="stylesheet" type="text/css" media="all" />
 <!--nav-->
 <script src="<?php echo get_js_family('jquery.min.js');?>"></script>

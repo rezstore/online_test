@@ -9,7 +9,7 @@ class M_contributor extends CI_Model
   function insert_activity($userid,$activity){
   	$user_id=$this->escape($userid);
   	$activity=$this->escape($activity);
-  	$sql="INSERT INTO adm_activities (`date`,`user_ID`,`activity`) VALUES (NOW(),$user_id,$activities) ";
+  	$sql="INSERT INTO adm_activities (`date`,`user_ID`,`activity`) VALUES (NOW(),$user_id,$activity)";
   	$this->db->query($sql);
   }
   
@@ -43,7 +43,7 @@ class M_contributor extends CI_Model
 
    }
    
-   function select_detail_exam($id,$username,$mapel='',$class=''){
+   function select_detail_exam($id,$username,$mapel='',$class='',$page=0){
    	$username=$this->escape($username);
 	$id=$this->escape($id);
 	if($mapel == "" or $class == ""){
@@ -76,7 +76,7 @@ class M_contributor extends CI_Model
 		LEFT JOIN correct_answer ON correct_answer.exam_ID = exam_questions.exam_ID
 		 	WHERE exam_questions.class_code=$class 
 		 		and exam_questions.subject_code=$mapel 
-		 		and adm_users.username = $username";
+		 		and adm_users.username = $username LIMIT $page,10";
 		return $this->db->query($sql);
 		exit;
    }
@@ -207,6 +207,18 @@ class M_contributor extends CI_Model
    	$sql="SELECT * FROM adm_activities WHERE date=$date AND user_ID=$userid";
    	$q=$this->db->query($sql);
    	return $q;
+   }
+   
+   function get_total_rec($table_name,$userid='',$mapel='',$class=''){
+   	$table=$this->escape($table_name);
+   	$userid=$this->escape($userid);
+   	$subject=$this->escape($mapel);
+	$class=$this->escape($class);
+   	$sql="SELECT COUNT(*) as total FROM $table_name WHERE user_ID=$userid AND subject_code=$subject AND class_code=$class";
+   	$q=$this->db->query($sql);
+   	foreach($q->result() as $r){
+   		return $r->total;
+   	}
    }
    
 
