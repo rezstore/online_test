@@ -77,29 +77,42 @@ class M_admin extends CI_Model
 	return $q;
    }
    
-   function select_detail_exam($id){
+   function select_detail_exam($id,$username,$mapel='',$class='',$page=0){
+   	$username=$this->escape($username);
 	$id=$this->escape($id);
-	$sql="SELECT * FROM exam_questions WHERE exam_ID = $id  LIMIT 1";
-	foreach($this->db->query($sql)->result() as $r){
-		$mapel=$this->escape($r->subject_code);
-		$class=$this->escape($r->class_code);
-		$sql="SELECT exam_questions.exam_ID ,exam_questions.subject_code ,exam_questions.class_code ,exam_questions.exam_content , 
-			subjects.subject_name,
+	if($mapel == "" or $class == ""){
+		$mapel='';$class=''; //unset values
+		$sql="SELECT * FROM exam_questions WHERE exam_ID = $id  LIMIT 1";
+		foreach($this->db->query($sql)->result() as $r){
+			$mapel=$r->subject_code;
+			$class=$r->class_code;
+		}
+	}else{
+		
+	}
+		$mapel=$this->escape($mapel);
+		$class=$this->escape($class);
+		$sql="SELECT exam_questions.exam_ID ,
+					exam_questions.subject_code ,
+					exam_questions.class_code ,
+					exam_questions.exam_content , 
 			choice_answers.a,
 			choice_answers.b,
 			choice_answers.c,
 			choice_answers.d,
 			choice_answers.e,
-			correct_answer.answer ,adm_users.username as subscriber
+				correct_answer.answer ,
+				adm_users.username as subscriber
 		FROM exam_questions 
 		LEFT JOIN subjects ON exam_questions.subject_code=subjects.subject_code
 		LEFT JOIN adm_users ON adm_users.ID=exam_questions.user_ID
 		LEFT JOIN choice_answers ON choice_answers.exam_ID = exam_questions.exam_ID
 		LEFT JOIN correct_answer ON correct_answer.exam_ID = exam_questions.exam_ID
-		 WHERE exam_questions.class_code=$class and exam_questions.subject_code=$mapel ";
+		 	WHERE exam_questions.class_code=$class 
+		 		and exam_questions.subject_code=$mapel 
+		 		 LIMIT $page,10";
 		return $this->db->query($sql);
 		exit;
-	}
    }
    
    function select_all_exam_where($id){
@@ -179,6 +192,31 @@ class M_admin extends CI_Model
 	$this->db->query($sql);
 	echo $sql="INSERT INTO correct_answer (`exam_ID`,`answer`) VALUES ($id,$true)";
 	$this->db->query($sql);
+   }
+   
+   function get_total_rec($table_name,$mapel='',$class=''){
+   	$table=$this->escape($table_name);
+   	$subject=$this->escape($mapel);
+	$class=$this->escape($class);
+   	$sql="SELECT COUNT(*) as total FROM $table_name WHERE subject_code=$subject AND class_code=$class";
+   	$q=$this->db->query($sql);
+   	foreach($q->result() as $r){
+   		return $r->total;
+   	}
+   }
+   
+   function select_all_users($username){
+	$user=$this->escape($username);
+	$sql="SELECT * FROM adm_users WHERE  username <> $user";
+	$q=$this->db->query($sql);
+	return $q;
+   }
+   
+   function select_adm_details($id){
+	$id=$this->escape($id);
+	$sql="SELECT * FROM adm_users WHERE  ID = $id";
+	$q=$this->db->query($sql);
+	return $q;
    }
    
    

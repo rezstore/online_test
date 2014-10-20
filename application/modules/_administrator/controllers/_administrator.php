@@ -31,6 +31,10 @@ class _administrator extends CI_Controller {
 	 return $this->input->post($str);
 	}
 	
+	function get($str){
+		return $this->input->get($str);
+	}
+	
 	function unset_sessions($all="ALL",$array=array()){
 		$this->load->library('session');
 		if($all == "ALL"){
@@ -44,6 +48,7 @@ class _administrator extends CI_Controller {
 			}
 		}
 	}
+	
 	
 # LOGOUT
 	function logout(){
@@ -104,15 +109,40 @@ class _administrator extends CI_Controller {
 		$this->footer($data);
 	}
 	
-	function exam_detail($ID){
+	function exam_detail($ID,$mapel='',$class=''){
 		$this->load->helper('form');
+		//initial mapel
+		$mpl=$this->get_session('mapel');
+		if($mpl == ""){$mapel="";$class="";}else{
+			$m=explode('-',$mpl);
+			$mapel=$m[0];
+			$class=$m[1];
+		}
+		$userid=$this->m_admin->select_user_ID($this->check_username());
 		$data['title']="Exam Detail";
 		$data['active']="exam";
+		$page=$this->get("p");
+		if(!is_numeric($page) or $page < 0)$page=0;
+		if($page == ""){$page=0;}else{$page = ($page*10)-10;}
+		$data['page']=$page;
+		$data['active_page']=($page/10)+10 - 10 +1;
 		$data['ctrl']=$this;
-		$data['datas']=$this->m_admin->select_detail_exam($ID);
+		$data['datas']=$this->m_admin->select_detail_exam($ID,$this->check_username(),$mapel,$class,$page);
+		$data['record_total']=$this->record_total("exam_questions",$mapel,$class);
 		$this->header($data);
 		$this->load_view("exam_detail",$data);
 		$this->footer($data);
+	}
+	
+	function record_total($table,$mapel='',$class=''){
+		$rec_total=$this->get_session('rec_total');
+		if ($rec_total == ""){
+			//with parameter table name
+			$rec_total=$this->m_admin->get_total_rec($table,$mapel,$class);
+			$this->get_session('rec_total',$rec_total);
+			$this->unset_sessions("NOT_ALL",array('mapel')); //unset mapel
+		}
+		return $rec_total;
 	}
 	
 	function edit_exam($id=""){
@@ -176,6 +206,28 @@ class _administrator extends CI_Controller {
 			redirect(get_site_url("exam"));
 		 }
 		}
+	}
+	
+	// add in 0ct 18 
+	
+	function users(){
+	$username=$this->check_username();
+		$data['users']=$this->m_admin->select_all_users($username);
+		$data['title']="Users";
+		$data['active']="users";
+		$this->header($data);
+		$this->load_view("user_datas",$data);
+		$this->footer($data);
+	}
+	
+	function user_detail($id){
+		$this->load->helper("form");
+		$data["details"]=$this->m_admin->select_adm_details($id);
+		$data['title']="Users";
+		$data['active']="users";
+		$this->header($data);
+		$this->load_view("user_details",$data);
+		$this->footer($data);
 	}
 	
 }
