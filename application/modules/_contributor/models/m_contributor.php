@@ -221,6 +221,20 @@ class M_contributor extends CI_Model
    	}
    }
    
+   function select_password_setting($username){
+   	$username=$this->escape($username);
+   	$sql="SELECT password FROM adm_users WHERE username=$username";
+   	$q=$this->db->query($sql);
+   	return $q;
+   }
+   
+   function update_user_pass($username,$pass){
+   	$username=$this->escape($username);
+   	$password=$this->escape($pass);
+   	$sql="UPDATE adm_users SET password=$password WHERE username=$username";
+   	$this->db->query($sql);
+   }
+   
 
 
 }

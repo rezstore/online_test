@@ -11,6 +11,16 @@ class _contributor extends CI_Controller {
 		$this->check_username();
 	 }
 	 
+	function set_flash_data($name,$value){
+		$this->load->library('session');
+		$this->session->set_flashdata($name, $value);
+	}
+	 
+	function get_flash_data($name){
+		$this->load->library('session');
+		return $this->session->flashdata($name);
+	}
+	 
 	function set_session($name,$val){
 		$this->load->library('session');
 		$this->session->set_userdata($name,$val);
@@ -251,6 +261,30 @@ class _contributor extends CI_Controller {
 	 	if ($activity=="")exit;
 	 	$userid=$this->m_contributor->select_user_ID($this->check_username());
 	 	$this->m_contributor->insert_activity($userid,$activity);
+	 }
+	 
+	 function settings(){
+	 	if($_POST){
+	 	 $new_pass=$this->post("contrib_pass");
+	 	 if(empty($new_pass))$err="Kolom tidak boleh di kosongi !!!";
+	 	  if(empty($err)){
+		 	 $this->load->library('encrypt');
+		 	 $pass=$this->encrypt->encode($new_pass);
+		 	 $this->m_contributor->update_user_pass($this->check_username(),$pass);
+		 	 $this->insert_activities("merubah password!!!");
+		 	 $this->set_flash_data('success',"Password Berhasil Diubah!!!");
+		 	 redirect(get_site_url('settings'));
+		   }
+		   $data['error']=$err;
+	 	}
+		$this->load->helper("form");
+	 	$data["title"]="Contributor settings";
+		$data['active']="settings";
+		$data['success']=$this->get_flash_data('success');
+		$data['pass']=$this->m_contributor->select_password_setting($this->check_username());
+		$this->header($data);
+		$this->load->view("contrib_settings",$data);
+		$this->footer($data);
 	 }
 	
 }

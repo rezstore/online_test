@@ -9,7 +9,7 @@ class M_contributor extends CI_Model
   function insert_activity($userid,$activity){
   	$user_id=$this->escape($userid);
   	$activity=$this->escape($activity);
-  	$sql="INSERT INTO adm_activities (`date`,`user_ID`,`activity`) VALUES (NOW(),$user_id,$activity) ";
+  	$sql="INSERT INTO adm_activities (`date`,`user_ID`,`activity`) VALUES (NOW(),$user_id,$activity)";
   	$this->db->query($sql);
   }
   
@@ -219,6 +219,19 @@ class M_contributor extends CI_Model
    	foreach($q->result() as $r){
    		return $r->total;
    	}
+   }
+   
+   function select_password_setting($username){
+   	$username=$this->escape($username);
+   	$sql="SELECT password FROM adm_users WHERE username=$username";
+   	$q=$this->db->query($sql);
+   	return $q;
+   }
+   
+   function update_user_pass($username,$pass){
+   	$username=$this->escape($username);
+   	$sql="UPDATE adm_users SET password=$password WHERE username=$username";
+   	$this->db->query($sql);
    }
    
 
