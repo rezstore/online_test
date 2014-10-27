@@ -21,7 +21,7 @@
 	</tr>
 	<tr>
 	 <td>New Password :</td>
-	 	<td width="200"><?php echo form_open().input('contrib_pass','','type="password"'); ?></td>
+	 	<td width="200"><?php echo form_open().input('contrib_pass','','type="password" placeholder="******"'); ?></td>
 	 	<td><?php echo submit('submit','Ubah','class="btn btn-primary"').form_close(); ?></td>
 	</tr>
 </table>

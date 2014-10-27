@@ -67,7 +67,7 @@ if ($active == "contact"){
 		</div>
 		<div class="cssmenu">
 			<ul>
-			  	<li<?php echo $home_active; ?>><a href="<?php echo get_site_url('');?>">Home</a></li>
+			  	<li<?php echo $home_active; ?>><a href="<?php echo get_site_url('default_page');?>">Home</a></li>
 				<li<?php echo $blog_active; ?>><a href="<?php echo get_site_url('blog');?>">Blog</a></li>
 				<li<?php echo $about_active; ?> ><a href="<?php echo get_site_url('about');?>">About</a></li>
 				<li<?php echo $contact_active; ?> ><a href="<?php echo get_site_url('contact');?>">Contact</a></li>

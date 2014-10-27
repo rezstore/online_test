@@ -40,30 +40,30 @@
   $ID=$row->exam_ID;
   $subject=$row->subject_code;
   $class=$row->class_code;
-  $content=$row->exam_content;
-  $a=$row->a;
-  $b=$row->b;
-  $c=$row->c;
-  $d=$row->d;
-  $e=$row->e;
-  if (strlen($content) > 20 ){$content=substr($content,0,20).'...';}
-  if (strlen($a) > 20 ){$a=substr($a,0,20).'...';}
-  if (strlen($b) > 20 ){$b=substr($b,0,20).'...';}
-  if (strlen($c) > 20 ){$c=substr($c,0,20).'...';}
-  if (strlen($d) > 20 ){$d=substr($d,0,20).'...';}
-  if (strlen($e) > 20 ){$e=substr($e,0,20).'...';}
+  $_content=$row->exam_content;
+  $_a=$row->a;
+  $_b=$row->b;
+  $_c=$row->c;
+  $_d=$row->d;
+  $_e=$row->e;
+  if (strlen($_content) > 20 ){$content=substr($_content,0,20).'...';}else {$content=$_content;}
+  if (strlen($_a) > 20 ){$a=substr($_a,0,20).'...';}else {$a=$_a;}
+  if (strlen($_b) > 20 ){$b=substr($_b,0,20).'...';}else {$b=$_b;}
+  if (strlen($_c) > 20 ){$c=substr($_c,0,20).'...';}else {$c=$_c;}
+  if (strlen($_d) > 20 ){$d=substr($_d,0,20).'...';}else {$d=$_d;}
+  if (strlen($_e) > 20 ){$e=substr($_e,0,20).'...';}else {$e=$_e;}
   $correct=ucfirst($row->answer);
   if($n%2== 0){$bg="ba	ckground:#E4E4E4";}else{$bg="";}
  ?>
  <?php 	
 	 echo "<tr style=".$bg.">";
  	  echo "<td class='tip' title='Soal No. $n'> $n</td>";
-	  echo "<td class='tip' title='$content'>".$content."</td>";
-	  echo "<td class='tip' title='$a'>".$a."</td>";
-	  echo "<td class='tip' title='$b'>".$b."</td>";
-	  echo "<td class='tip' title='$c'>".$c."</td>";
-	  echo "<td class='tip' title='$d'>".$d."</td>";
-	  echo "<td class='tip' title='$e'>".$e."</td>";
+	  echo "<td class='tip' title='$_content'>".$content."</td>";
+	  echo "<td class='tip' title='$_a'>".$a."</td>";
+	  echo "<td class='tip' title='$_b'>".$b."</td>";
+	  echo "<td class='tip' title='$_c'>".$c."</td>";
+	  echo "<td class='tip' title='$_d'>".$d."</td>";
+	  echo "<td class='tip' title='$_e'>".$e."</td>";
 	  echo "<td>$correct</td>";
  ?>
 	  <td>

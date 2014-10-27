@@ -11,7 +11,8 @@
 			$image=$r->blog_image;
 			$content=$r->blog_content;
 			$url=$r->blog_url;
-			$post_date=$r->post_date;
+			$date = date_create($r->post_date);
+     			$post_date=date_format($date,'d M Y');
 		?>
 			<div class="blog_list">
 				<h4><a href=""><?php echo $title; ?></a></h4>

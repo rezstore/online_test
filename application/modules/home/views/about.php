@@ -2,7 +2,7 @@
     <!-- start content -->
 	 <div class="main1">
 	 	 <div class="content">
-	 	 	<h2>About us </h2>
+	 	 	<h2>About us - Indotes.com</h2>
 	 	 </div>
 	 	 <div class="about">
 	 	 	<p class="para1"><b>IndoTes.com</b> Adalah Sebuah Situs yang dibuka untuk membuat kegiatan belajar siswa sekolah agar lebih mudah dan menyenangkan dengan sistem online</p>

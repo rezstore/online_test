@@ -21,7 +21,7 @@
     foreach($activities->result() as $row){
      $id=$row->ID;
      $date = date_create($row->date);
-     $date=date_format($date,'d-M-Y');;
+     $date=date_format($date,'d-M-Y');
      $activity=$row->activity;
      $button_lihat=anchor(get_site_url("show_detail/$id"),"Lihat",'class="btn btn-primary"').' ';
      $button_edit="";//anchor(get_site_url(""),"Edit",'class="btn"');

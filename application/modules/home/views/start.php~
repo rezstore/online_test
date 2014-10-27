@@ -111,7 +111,7 @@ $config = array(
 		</tr>
 	      <?php
 	      echo form_open(get_site_url('check_answers'));
-	      echo $no_page;
+	      $no_page;
 	      $exam=$this->m_oltest->get_questions($subject,$class,$no_page);
 	       if (!isset($exam))exit;
 	       $no= $no_page+1;$n=1;
@@ -124,17 +124,19 @@ $config = array(
 	        $e=str_replace('src="../../../assets/uploads/',"width=100px src=\"".get_image_tes().'/',$r->e);
 	      ?>
 		      <tr>
+			      <td><span><?php echo form_hidden('id_soal[]',$r->exam_ID)."<strong>$no</strong>"; ?></span> &nbsp; </td>
 			      <td colspan=2>
-			       <p><span><?php echo "<strong>$no</strong>"; ?></span> &nbsp; <?php echo form_hidden('id_soal[]',$r->exam_ID).$question; ?></p>
+			       <?php echo "<p style='float:left'>$question</p>"; ?>
 			      </td>
 			</tr>
 			<tr>
+			      <td></td>
 			      <td style="padding-left:45px;" class="text-left">
-			      	<p>
 			      	  <span>
 			      	   <input type="radio" name="answer<?php echo $n;?>" id="optionsRadios1" value="A"> 
 			      	   <strong>A. </strong>
 			      	  </span>
+			      	<p>
 			      	   <?php echo $a; ?>
 			      	</p>
 			      	<p>

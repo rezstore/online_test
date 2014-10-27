@@ -15,6 +15,7 @@
 				  <div class="contact-form">
 				 	 <div class="content">
 				 	 	<h2>Hubungi Kami</h2>
+				 	 	Jika Anda ingin berpartisipasi dalam pembuatan soal-soal yang ada di Indotes.com, kami sangat mengharapkan partisipasinya dengan menghubungi nomor yang telah kami cantumkan dibawah ini.
 				 	 </div>
 				 	 <table class="table">
 				 	  <tr>

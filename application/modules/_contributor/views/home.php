@@ -57,7 +57,8 @@
   $no=1;
     foreach($activities->result() as $row){
      $id=$row->ID;
-     $date=$row->date;
+     $date = date_create($row->date);
+     $date=date_format($date,'d-M-Y');
      $activity=$row->activity;
      $total=$row->total;
      $button_lihat=anchor(get_site_url("show_detail/$id"),"Lihat",'class="btn btn-primary"').' ';

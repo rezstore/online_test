@@ -65,7 +65,7 @@ class Adm extends CI_Controller {
 			$data['error']=$err;
 			$data['user']=$user;
 		}
-		$this->set_session('captcha',date('sisis')-date('i')-2);
+		$this->set_session('captcha',43 + date('sisis')-date('i')-2);
 		$this->load->helper('form');
 		$data['controller']=$this;
  		$this->load->view('login',$data);

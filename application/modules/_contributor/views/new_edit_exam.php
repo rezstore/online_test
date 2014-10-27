@@ -65,7 +65,7 @@ if ($mapel == ""){
  </tr>
  <tr>
   <td>Jawaban</td>	<td>:</td>
- 	<td>B</td>
+ 	<td class='text-bold'>B</td>
   	<td>
   	 <?php echo textarea('jawab_b',$jawab_b,'editor_answers'); ?>
   	</td>

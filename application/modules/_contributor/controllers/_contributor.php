@@ -54,6 +54,7 @@ class _contributor extends CI_Controller {
 # LOGOUT
 	function logout(){
 		$this->unset_sessions();
+		redirect(get_site_url());
 	}
 	
 #FORM
@@ -87,7 +88,8 @@ class _contributor extends CI_Controller {
 		$data['title']="Home";
 		$data['active']="home";
 		$data['ctrl']=$this;
-		$data['activities']=$this->m_contributor->select_activity_where($user_ID);
+		$bln=date("m");
+		$data['activities']=$this->m_contributor->select_activity_where($user_ID,$bln);
 		$this->header($data);
 		$this->load_view("home",$data);
 		$this->footer($data);

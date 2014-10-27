@@ -29,7 +29,7 @@ foreach($subject->result() as $q){
 		      <tr>
 		      <td colspan=3 style="text-align:right;">
 		      	<?php
-		      	 echo '<button type="button" class="btn btn-danger">Batal</button> '.submit('submit','start','class="btn btn-primary"');
+		      	 echo anchor('','Batal','class="btn btn-danger"').' '.submit('submit','start','class="btn btn-primary"');
 		      	?></td>
 		      </tr>
 	      </table>

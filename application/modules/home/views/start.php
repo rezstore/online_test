@@ -67,7 +67,7 @@ $config = array(
     <div class="banner">
 	      <table class="table">
 	        <tr>
-		      <td colspan=2>
+		      <td colspan=3>
 		       <div id="countdown_dashboard" style="text-align:right">
 				<div class="dash hours_dash">
 					<span class="dash_title">hours</span>
@@ -124,17 +124,19 @@ $config = array(
 	        $e=str_replace('src="../../../assets/uploads/',"width=100px src=\"".get_image_tes().'/',$r->e);
 	      ?>
 		      <tr>
+			      <td><span><?php echo form_hidden('id_soal[]',$r->exam_ID)."<strong>$no</strong>"; ?></span> &nbsp; </td>
 			      <td colspan=2>
-			       <p><span><?php echo "<strong>$no</strong>"; ?></span> &nbsp; <?php echo form_hidden('id_soal[]',$r->exam_ID).$question; ?></p>
+			       <?php echo "<p style='float:left'>$question</p>"; ?>
 			      </td>
 			</tr>
 			<tr>
+			      <td></td>
 			      <td style="padding-left:45px;" class="text-left">
-			      	<p>
 			      	  <span>
 			      	   <input type="radio" name="answer<?php echo $n;?>" id="optionsRadios1" value="A"> 
 			      	   <strong>A. </strong>
 			      	  </span>
+			      	<p>
 			      	   <?php echo $a; ?>
 			      	</p>
 			      	<p>

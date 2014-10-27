@@ -1,6 +1,8 @@
 <?php
-$subject=$this->m_oltest->select_subject_name($c->get_session('subject'));
-$class=strtoupper($c->get_session('class'));
+$_subject=$c->get_flashdata('subject');
+$_class=$c->get_flashdata('class');
+$subject=$this->m_oltest->select_subject_name($_subject);
+$class=strtoupper($_class);
 ?>
     <div class="banner">
       <table style="width:100%;text-align:justify;">
@@ -23,7 +25,7 @@ $class=strtoupper($c->get_session('class'));
 	      </tr><tr>
 	      <td style="text-align:right">
 	      <?php
-	       echo anchor(get_site_url(''),'<button type="button" class="btn btn-danger">Tolak</button>').nbs();
+	       echo anchor(get_site_url('online_test'),'Tolak','class="btn btn-danger"').nbs();
 	       echo '<button type="button" class="btn btn-primary" onclick="set_time();">Lanjut</button>';
 	      ?>
 	      </td>
@@ -33,8 +35,8 @@ $class=strtoupper($c->get_session('class'));
  <script src="<?php echo get_js_family('jquery.min.js'); ?>"></script>
  <script>
  	function set_time(){
- 		$("#loader").load("<?php echo get_site_url('set_time'); ?>");
- 		window.open("<?php echo get_site_url('set_time'); ?>", "", "width=400, height=100");
+ 		$("#loader").load("<?php echo get_site_url('set_time/'.$_subject.'/'.$_class); ?>");
+ 		window.open("<?php echo get_site_url('set_time/'.$_subject.'/'.$_class); ?>", "", "width=400, height=100");
  		var url="<?php echo get_site_url('start');?>";
  		setTimeout(function(){window.location=url;},5000);
  	}

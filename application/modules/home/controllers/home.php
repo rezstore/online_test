@@ -14,6 +14,11 @@ class Home extends CI_controller  {
 		$this->session->set_userdata('username',$user);
 	}
 	
+	function set_flashdata($name,$val){
+		$this->load->library('session');
+		$this->session->set_flashdata($name,$val);
+	}
+	
 	function set_session($name,$val){
 		$this->load->library('session');
 		$this->session->set_userdata($name,$val);
@@ -28,8 +33,13 @@ class Home extends CI_controller  {
 	function get_username(){
 		$this->load->library('session');
 		$user =$this->session->userdata('username');
-		//if($user == "")redirect(get_site_url());
+		//if($user == "")redirect();
 		return $user;
+	}
+	
+	function get_flashdata($name){
+		$this->load->library('session');
+		return $this->session->flashdata($name);
 	}
 # UNSET SESSION
 	function unset_sessions($all='ALL',$val1='',$val2=''){
@@ -140,27 +150,32 @@ class Home extends CI_controller  {
 	function start_test(){
 		$data['title']="Bersiap!!!";
 		$data['active']="home";
-		/*$subject=$this->get_session('subject');
-		if($subject != ""){redirect(get_site_url('start'));}
-		*/
-		 $this->load->helper('form');
-		 $subject=$this->get_session('subject');
-		 $class=$this->get_session('class');
+		 $subject=$this->get_flashdata('subject');
+		 $class=$this->get_flashdata('class');
+		 if($subject == ""){
+			 $this->load->helper('form');
+			 $subject=$this->get_session('subject');
+			 $class=$this->get_session('class');
+		 }
 		 $data['c']=$this;
 		 if ($subject != "" and $class != ""){
 		 	$data['datas']=$this->m_oltest->select_available_exam($subject,$class);
 			$this->header($data);
 			$this->load->view('start_test',$data);
 			$this->footer($data);		 
+		 }else{
+		 	redirect(get_site_url('online_test'));
 		 }
 	}
 	
-	function set_time(){
+	function set_time($subject='',$class=''){
 		//date_default_timezone_set("Asia/jakarta");
 		$next_time = time() + (1 * 1 * 61 * 00);
 		                   // 7 days; 24 hours; 60 mins; 60 secs
 		$target=date('Y|m|d|H|i|s',$next_time);
 		$this->set_session('time_start',$target);
+		$this->set_session('subject',$subject);
+		$this->set_session('class',$class);
 		//echo $this->get_session('time_start');
 		echo "Ayo Cepat Jawab Pertanyaan nya <b>60 menit</b> Dari sekarang dan dapatkan hasil terbaikmu....";
 		echo "
@@ -188,8 +203,8 @@ class Home extends CI_controller  {
 			if ($subject !== "" and $class !== ""){
 				$q=$this->m_oltest->select_available_exam($subject,$class);
 				if ($q >= 1){
-					$this->set_session('subject',$subject);
-					$this->set_session('class',$class);
+					$this->set_flashdata('subject',$subject);
+					$this->set_flashdata('class',$class);
 					$this->set_session('sess_id',date('dmis').'-'.$subject.'-'.$class);
 					redirect(get_site_url('start_test'));
 				}else{$err= "Maaf Saat ini soal Tersebut Belum Tersedia.";}			
